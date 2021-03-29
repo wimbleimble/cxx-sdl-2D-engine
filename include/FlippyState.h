@@ -16,6 +16,7 @@ public:
 	~FlippyState();
 
 	virtual void enter(Engine* engine);
+	virtual void handleInput(SDL_Event event);
 	virtual void update(Engine* engine);
 	virtual void exit(Engine* engine);
 

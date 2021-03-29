@@ -31,7 +31,25 @@ Engine::~Engine()
 int Engine::exec()
 {
 	_state->enter(this);
-	_state->update(this);
+	bool run{ true };
+	SDL_Event event;
+	while(run)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			switch (event.type)
+			{
+				case SDL_QUIT:
+					run = false;
+					break;
+				case SDL_KEYDOWN:
+					_state->handleInput(event);
+					break;
+			}
+		} 
+		if(run)
+			_state->update(this);
+	}
 	_state->exit(this);
 	return 0;
 }

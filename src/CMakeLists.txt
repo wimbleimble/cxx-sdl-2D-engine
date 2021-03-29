@@ -11,7 +11,6 @@ project(SDLTest VERSION 0.0.1
 		DESCRIPTION "testing testing 123"
 		LANGUAGES CXX)
 
-
 set(cppFiles
 	Main.cpp
 	Err.cpp
@@ -27,13 +26,21 @@ set(cppFiles
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_Image REQUIRED) 
-include_directories(${SDL2_INCLUDE_DIRS})
-include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}
 	${headerFiles}
 	${cppFiles}
 )
+
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
+
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_IMAGE_LIBRARIES})
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+	copy_directory "../lib" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+	copy_directory "../assets" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
