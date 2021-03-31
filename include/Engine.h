@@ -25,6 +25,7 @@ private:
 	SDL_Renderer* _renderer;
 	State* _state;
 	bool _run;
+	double _deltaTime;
 
 	void setState(State* state);
 
@@ -35,6 +36,7 @@ public:
 	~Engine();
 
 	SDL_Renderer* renderer();
+	double deltaTime() const;
 
 	int exec(State* entryState);
 };

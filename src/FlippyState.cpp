@@ -6,9 +6,15 @@
 
 FlippyState::FlippyState(Engine* engine)
 	: State{},
-	fuck{ engine->renderer(), "tiny.png" }
+	fuck{ engine->renderer(), "vriska.png", 138 }
 {
 	_actors.push_back(&fuck);
+	fuck.sprite().addAnimation("WalkDown", 16, 9, 30);
+	fuck.sprite().addAnimation("WalkLeft", 44, 8, 30);
+	fuck.sprite().addAnimation("WalkRight", 25, 9, 30);
+	fuck.sprite().addAnimation("WalkUp", 34, 8, 30);
+	fuck.sprite().addAnimation("Idle", 0, 1, 30);
+	fuck.sprite().setAnimation("Idle");
 }
 
 FlippyState::~FlippyState()
@@ -38,6 +44,17 @@ State* FlippyState::update(Engine* engine)
 		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-fuck.speed, 0) 
 		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(fuck.speed, 0) 
 	);
+
+	if (k[SDL_SCANCODE_UP])
+		fuck.sprite().setAnimation("WalkUp");
+	else if (k[SDL_SCANCODE_DOWN])
+		fuck.sprite().setAnimation("WalkDown");
+	else if (k[SDL_SCANCODE_LEFT])
+		fuck.sprite().setAnimation("WalkLeft");
+	else if (k[SDL_SCANCODE_RIGHT])
+		fuck.sprite().setAnimation("WalkRight");
+	else
+		fuck.sprite().setAnimation("Idle");
 
 	fuck.position() += fuck.v();
 	return nullptr;

@@ -11,7 +11,7 @@ protected:
 	Vec2 _position;
 
 public:
-	Actor(SDL_Renderer* context, const std::string& path);
+	Actor(SDL_Renderer* context, const std::string& path, int frames = 1);
 	virtual ~Actor() {};
 
 	virtual void update() = 0;

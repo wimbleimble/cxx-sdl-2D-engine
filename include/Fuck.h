@@ -8,7 +8,7 @@ class Fuck : public Actor
 	Vec2 _v;
 public:
 	static constexpr int speed{ 5 };
-	Fuck(SDL_Renderer* context, const std::string& path);
+	Fuck(SDL_Renderer* context, const std::string& path, int frames);
 	~Fuck();
 
 	virtual void update();

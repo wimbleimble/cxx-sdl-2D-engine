@@ -37,12 +37,23 @@ int Engine::exec(State* entryState)
 {
 	setState(entryState);
 
+	Uint64 currentTime{ SDL_GetPerformanceCounter() };
+	Uint64 prevTime{ 0 };
+
 	SDL_Event event;
 	State* newState{ nullptr };
 
 	_run = true;
-	while(_run)
+	while (_run)
 	{
+		prevTime = currentTime;
+		currentTime = SDL_GetPerformanceCounter();
+
+		_deltaTime = static_cast<double>(
+			(currentTime - prevTime) * 1000
+			/
+			static_cast<double>(SDL_GetPerformanceFrequency())
+		);
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -81,6 +92,11 @@ SDL_Renderer* Engine::renderer()
 	return _renderer;
 }
 
+double Engine::deltaTime() const
+{
+	return _deltaTime;
+}
+
 void Engine::setState(State* state)
 {
 	std::cout << "Changing state\n";
@@ -99,7 +115,7 @@ void Engine::render()
 	SDL_RenderClear(_renderer);
 	for(Actor* actor : _state->actors())
 	{
-		SDL_Rect* srcRect{ nullptr };
+		SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
 		SDL_Rect dstRect{
 			actor->position().x(),
 			actor->position().y(),
@@ -110,7 +126,7 @@ void Engine::render()
 		SDL_RenderCopy(
 			_renderer,
 			actor->sprite().texture(),
-			srcRect,
+			&srcRect,
 			&dstRect
 		);
 	}

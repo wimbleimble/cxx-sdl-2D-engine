@@ -1,7 +1,7 @@
 #include "Fuck.h"
 
-Fuck::Fuck(SDL_Renderer* context, const std::string& path)
-	: Actor{ context, path }, _v{}
+Fuck::Fuck(SDL_Renderer* context, const std::string& path, int frames)
+	: Actor{ context, path, frames }, _v{}
 {
 }
 

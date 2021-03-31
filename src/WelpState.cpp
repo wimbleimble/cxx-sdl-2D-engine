@@ -4,7 +4,7 @@
 
 
 WelpState::WelpState(Engine* engine)
-	: State{}, fuck { engine->renderer(), "fuck.png" }
+	: State{}, fuck { engine->renderer(), "fuck.png", 1}
 {
 	_actors.push_back(&fuck);
 }

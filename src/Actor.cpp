@@ -1,7 +1,7 @@
 #include "Actor.h"
 
-Actor::Actor(SDL_Renderer* context, const std::string& path)
-	: _sprite{ context, path }, _position{}
+Actor::Actor(SDL_Renderer* context, const std::string& path, int frames)
+	: _sprite{ context, path, frames}, _position{}
 {
 }
 
