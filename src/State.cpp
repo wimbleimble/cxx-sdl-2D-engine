@@ -1,1 +1,6 @@
-//this is needed to make intellisense happy, it doesn't actually compile.
+#include "State.h"
+
+const std::vector<Actor*>& State::actors() const
+{
+	return _actors;
+}

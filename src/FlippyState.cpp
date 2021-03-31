@@ -1,61 +1,51 @@
 #include "FlippyState.h"
 #include "Engine.h"
+#include "WelpState.h"
 #include <iostream>
 
-FlippyState::FlippyState()
-	: fuck{}, dirs{}, current{ nullptr }
+FlippyState::FlippyState(Engine* engine)
+	: State{},
+	fuck{ engine->renderer(), "tiny.png" }
+{
+	_actors.push_back(&fuck);
+}
+
+FlippyState::~FlippyState()
 {
 }
 
-FlippyState::~FlippyState() {}
-
-//maybe reimpliment with constructor??
 void FlippyState::enter(Engine* engine)
 {
 	std::cout << "Entered State.\n";
-	fuck = Sprite("fuck.png", engine->renderer());
-
-	dirs[0] = Sprite("up.png", engine->renderer());
-	dirs[1] = Sprite("down.png", engine->renderer());
-	dirs[2] = Sprite("left.png", engine->renderer());
-	dirs[3] = Sprite("right.png", engine->renderer());
-
-	current = &fuck;
 }
 
-void FlippyState::handleInput(SDL_Event event)
+State* FlippyState::handleInput(Engine* engine, SDL_Event event)
 {
-
 	switch (event.key.keysym.sym)
 	{
-	case SDLK_UP:
-		std::cout << "up pressed\n";
-		current = &dirs[0];
-		break;
-	case SDLK_DOWN:
-		std::cout << "down pressed\n";
-		current = &dirs[1];
-		break;
-	case SDLK_LEFT:
-		std::cout << "left pressed\n";
-		current = &dirs[2];
-		break;
-	case SDLK_RIGHT:
-		std::cout << "right pressed\n";
-		current = &dirs[3];
-		break;
+	case SDLK_RETURN:
+		return new WelpState(engine);
 	}
+	return nullptr;
 }
 
-void FlippyState::update(Engine* engine)
+State* FlippyState::update(Engine* engine)
 {
-	std::cout << "updating state.\n";
-	SDL_RenderClear(engine->renderer());
-	SDL_RenderCopy(engine->renderer(), current->texture(), nullptr, nullptr);
-	SDL_RenderPresent(engine->renderer());
-}
+	const Uint8* currentKeyStates{ SDL_GetKeyboardState(nullptr) };
+	if (currentKeyStates[SDL_SCANCODE_UP])
+		fuck.setV(Vec2(0, -fuck.speed));
+	else if (currentKeyStates[SDL_SCANCODE_DOWN])
+		fuck.setV(Vec2(0, fuck.speed));
+	else if (currentKeyStates[SDL_SCANCODE_LEFT])
+		fuck.setV(Vec2(-fuck.speed, 0));
+	else if (currentKeyStates[SDL_SCANCODE_RIGHT])
+		fuck.setV(Vec2(fuck.speed, 0));
+	else
+		fuck.setV(Vec2(0, 0));
 
+	fuck.position() += fuck.v();
+	return nullptr;
+}
 void FlippyState::exit(Engine* engine)
 {
-	std::cout << "Exitingstate.\n";
 }

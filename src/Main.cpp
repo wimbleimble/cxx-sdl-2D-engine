@@ -18,10 +18,8 @@ int main(int argc, char* args[])
 	LogHandler logHandler{};
 	try
 	{
-		FlippyState flippy{};
-		Engine engine{ &flippy };
-
-		return engine.exec();
+		Engine engine{};
+		return engine.exec(new FlippyState(&engine));
 	}
 	catch (const Err& err)
 	{

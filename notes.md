@@ -1,5 +1,9 @@
 # NOTES:
 
+## TODO:
+-	viewport and static entities(i.e. ui)
+-	draw order - some sort of z indexing
+-	smart pointers
 
 ## THINGS THAT MAY CAUSE PROBLEMS LATER:
 -	SDLImage paths resolve based on where the application is launched, and so

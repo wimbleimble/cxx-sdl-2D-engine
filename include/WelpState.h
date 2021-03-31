@@ -1,18 +1,16 @@
-#ifndef FLIPPYSTATE_H
-#define FLIPPYSTATE_H
+#ifndef WELPSTATE_H
+#define WELPSTATE_H
 #include "State.h"
 #include "Fuck.h"
-#include "Sprite.h"
 
-class FlippyState : public State
+class WelpState : public State
 {
 
 	Fuck fuck;
-
-
+	
 public:
-	FlippyState(Engine* engine);
-	~FlippyState();
+	WelpState(Engine* engine);
+	~WelpState();
 
 	virtual void enter(Engine* engine);
 	virtual State* handleInput(Engine* engine, SDL_Event event);

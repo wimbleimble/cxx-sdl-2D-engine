@@ -1,42 +1,52 @@
 #include "Vec2.h"
 
-template<typename T>
-Vec2<T>::Vec2()
+Vec2::Vec2()
 	: _x{}, _y{}
 {
 }
 
-template<typename T>
-Vec2<T>::Vec2(T x, T y)
+Vec2::Vec2(int x, int y)
 	: _x{x}, _y{y}
 {
 }
 
-template<typename T>
-Vec2<T>::~Vec2()
+Vec2::~Vec2()
 {
 }
 
-template<typename T>
-int Vec2<T>::x() const
+int Vec2::x() const
 {
 	return _x;
 }
 
-template<typename T>
-int Vec2<T>::y() const
+int Vec2::y() const
 {
 	return _y;
 }
 
-template<typename T>
-void Vec2<T>::setX(T x)
+void Vec2::setX(int x)
 {
 	_x = x;
 }
 
-template<typename T>
-void Vec2<T>::setY(T y)
+void Vec2::setY(int y)
 {
 	_y = y;
+}
+
+Vec2& Vec2::operator+=(const Vec2& vec)
+{
+	_x += vec.x();
+	_y += vec.y();
+	return *this;
+}
+
+Vec2 operator+(const Vec2& vec1, const Vec2& vec2)
+{
+	return Vec2(vec1.x() + vec2.x(), vec1.y() + vec2.y());
+}
+
+Vec2 operator-(const Vec2& vec1, const Vec2& vec2)
+{
+	return Vec2(vec1.x() - vec2.x(), vec1.y() - vec2.y());
 }

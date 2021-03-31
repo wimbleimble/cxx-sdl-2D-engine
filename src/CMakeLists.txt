@@ -4,14 +4,13 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
 	cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
 
 project(SDLTest VERSION 0.0.1
 		DESCRIPTION "testing testing 123"
 		LANGUAGES CXX)
 
-set(cppFiles
+set(src
 	Main.cpp
 	Err.cpp
 	SDLHandler.cpp
@@ -19,17 +18,18 @@ set(cppFiles
 	Sprite.cpp
 	Vec2.cpp
 	Engine.cpp
-	Renderer.cpp
-	MessageBus.cpp
+	State.cpp
 	FlippyState.cpp
+	Actor.cpp
+	Fuck.cpp
+	WelpState.cpp
 )
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_Image REQUIRED) 
 
 add_executable(${PROJECT_NAME}
-	${headerFiles}
-	${cppFiles}
+	${src}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)

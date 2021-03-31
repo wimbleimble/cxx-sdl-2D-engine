@@ -1,10 +1,11 @@
 #ifndef ENGINE_H 
 #define ENGINE_H
 #include "SDL.h"
-#include "SDLHandler.h"
+
 #include <vector>
 #include <string>
-#include "Renderer.h"
+
+#include "SDLHandler.h"
 #include "Sprite.h"
 #include "State.h"
 
@@ -23,16 +24,19 @@ private:
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
 	State* _state;
-
-public:
-	Engine() = delete;
-	Engine(State* entryState, const WindowParams& windowParams = {"Piss", 640, 480});
-	~Engine();
+	bool _run;
 
 	void setState(State* state);
+
+	void render();
+
+public:
+	Engine(const WindowParams& windowParams = {"Title", 640, 480});
+	~Engine();
+
 	SDL_Renderer* renderer();
 
-	int exec();
+	int exec(State* entryState);
 };
 
 #endif
