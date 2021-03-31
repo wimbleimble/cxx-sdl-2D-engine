@@ -1,6 +1,7 @@
 #include "FlippyState.h"
 #include "Engine.h"
 #include "WelpState.h"
+
 #include <iostream>
 
 FlippyState::FlippyState(Engine* engine)
@@ -16,14 +17,13 @@ FlippyState::~FlippyState()
 
 void FlippyState::enter(Engine* engine)
 {
-	std::cout << "Entered State.\n";
 }
 
 State* FlippyState::handleInput(Engine* engine, SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{
-	case SDLK_RETURN:
+	case SDLK_TAB:
 		return new WelpState(engine);
 	}
 	return nullptr;
@@ -31,17 +31,13 @@ State* FlippyState::handleInput(Engine* engine, SDL_Event event)
 
 State* FlippyState::update(Engine* engine)
 {
-	const Uint8* currentKeyStates{ SDL_GetKeyboardState(nullptr) };
-	if (currentKeyStates[SDL_SCANCODE_UP])
-		fuck.setV(Vec2(0, -fuck.speed));
-	else if (currentKeyStates[SDL_SCANCODE_DOWN])
-		fuck.setV(Vec2(0, fuck.speed));
-	else if (currentKeyStates[SDL_SCANCODE_LEFT])
-		fuck.setV(Vec2(-fuck.speed, 0));
-	else if (currentKeyStates[SDL_SCANCODE_RIGHT])
-		fuck.setV(Vec2(fuck.speed, 0));
-	else
-		fuck.setV(Vec2(0, 0));
+	const Uint8* k{ SDL_GetKeyboardState(nullptr) };
+	fuck.setV(
+		(int)k[SDL_SCANCODE_UP] * Vec2(0, -fuck.speed) 
+		+ (int)k[SDL_SCANCODE_DOWN] * Vec2(0, fuck.speed) 
+		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-fuck.speed, 0) 
+		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(fuck.speed, 0) 
+	);
 
 	fuck.position() += fuck.v();
 	return nullptr;

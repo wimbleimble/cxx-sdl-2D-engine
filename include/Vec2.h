@@ -21,4 +21,8 @@ public:
 	Vec2& operator+=(const Vec2& vec);
 };
 
+Vec2 operator+(const Vec2& vec1, const Vec2& vec2);
+Vec2 operator-(const Vec2& vec1, const Vec2& vec2);
+Vec2 operator*(int scalar, const Vec2& vec);
+Vec2 operator*(const Vec2& vec, int scalar);
 #endif

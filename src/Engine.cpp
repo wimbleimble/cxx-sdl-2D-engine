@@ -58,6 +58,7 @@ int Engine::exec(State* entryState)
 		if (newState != nullptr)
 		{
 			setState(newState);
+			newState = nullptr;
 			continue;
 		}
 
@@ -66,6 +67,7 @@ int Engine::exec(State* entryState)
 		if (newState != nullptr)
 		{
 			setState(newState);
+			newState = nullptr;
 			continue;
 		}
 		render();
@@ -81,18 +83,15 @@ SDL_Renderer* Engine::renderer()
 
 void Engine::setState(State* state)
 {
+	std::cout << "Changing state\n";
 	if (_state == nullptr)
 		_state = state;
 	else
 	{
-		std::cout << "Doin some of this\n";
 		_state->exit(this);
-		//delete _state;
 		_state = state;
 	}
-	std::cout << "and some of this\n";
 	_state->enter(this);
-	std::cout << "not to mention some of this\n";
 }
 
 void Engine::render()

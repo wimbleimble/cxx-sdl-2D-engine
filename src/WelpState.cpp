@@ -21,7 +21,7 @@ State* WelpState::handleInput(Engine* engine, SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{
-	case SDLK_RETURN:
+	case SDLK_TAB:
 		return new FlippyState(engine);
 	}
 	return nullptr;

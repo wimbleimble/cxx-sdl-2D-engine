@@ -50,3 +50,13 @@ Vec2 operator-(const Vec2& vec1, const Vec2& vec2)
 {
 	return Vec2(vec1.x() - vec2.x(), vec1.y() - vec2.y());
 }
+
+Vec2 operator*(int scalar, const Vec2& vec)
+{
+	return Vec2(scalar * vec.x(), scalar * vec.y());
+}
+
+Vec2 operator*(const Vec2& vec, int scalar)
+{
+	return scalar * vec;
+}
