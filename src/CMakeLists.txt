@@ -12,16 +12,17 @@ project(SDLTest VERSION 0.0.1
 
 set(src
 	Main.cpp
-	Err.cpp
-	SDLHandler.cpp
-	LogHandler.cpp
-	Sprite.cpp
-	Vec2.cpp
-	Engine.cpp
-	State.cpp
+	engine/Engine.cpp
+	engine/Err.cpp
+	engine/SDLHandler.cpp
+	engine/LogHandler.cpp
+	engine/Sprite.cpp
+	engine/Vec2.cpp
+	engine/State.cpp
+	engine/Actor.cpp
+	engine/Layer.cpp
+	Character.cpp
 	FlippyState.cpp
-	Actor.cpp
-	Fuck.cpp
 	WelpState.cpp
 )
 
@@ -33,6 +34,7 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
+target_include_directories(${PROJECT_NAME} PUBLIC ../include/engine)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
 

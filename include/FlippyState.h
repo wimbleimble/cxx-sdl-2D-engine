@@ -1,13 +1,14 @@
 #ifndef FLIPPYSTATE_H
 #define FLIPPYSTATE_H
 #include "State.h"
-#include "Fuck.h"
+#include "Character.h"
 #include "Sprite.h"
 
 class FlippyState : public State
 {
 
-	Fuck fuck;
+	Character vriska;
+	Character karkat;
 
 
 public:

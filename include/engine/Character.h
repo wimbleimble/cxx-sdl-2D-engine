@@ -3,13 +3,13 @@
 #include "Actor.h"
 #include "Sprite.h"
 
-class Fuck : public Actor
+class Character : public Actor
 {
 	Vec2 _v;
 public:
 	static constexpr int speed{ 5 };
-	Fuck(SDL_Renderer* context, const std::string& path, int frames);
-	~Fuck();
+	Character(SDL_Renderer* context, const std::string& path, int frames);
+	~Character();
 
 	virtual void update();
 	virtual bool visible() const;

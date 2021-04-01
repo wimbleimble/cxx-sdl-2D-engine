@@ -6,15 +6,28 @@
 
 FlippyState::FlippyState(Engine* engine)
 	: State{},
-	fuck{ engine->renderer(), "vriska.png", 138 }
+	vriska{ engine->renderer(), "vriska.png", 138 },
+	karkat{ engine->renderer(), "karkat.png", 141 }
 {
-	_actors.push_back(&fuck);
-	fuck.sprite().addAnimation("WalkDown", 16, 9, 30);
-	fuck.sprite().addAnimation("WalkLeft", 44, 8, 30);
-	fuck.sprite().addAnimation("WalkRight", 25, 9, 30);
-	fuck.sprite().addAnimation("WalkUp", 34, 8, 30);
-	fuck.sprite().addAnimation("Idle", 0, 1, 30);
-	fuck.sprite().setAnimation("Idle");
+	vriska.setZIndex(69);
+
+	_scene.push_back(Layer());
+	_scene[0].addActor(&vriska);
+	_scene[0].addActor(&karkat);
+
+	vriska.sprite().addAnimation("WalkDown", 16, 9, 30);
+	vriska.sprite().addAnimation("WalkLeft", 44, 8, 30);
+	vriska.sprite().addAnimation("WalkRight", 25, 9, 30);
+	vriska.sprite().addAnimation("WalkUp", 34, 8, 30);
+	vriska.sprite().addAnimation("Idle", 0, 1, 30);
+	vriska.sprite().setAnimation("Idle");
+
+	karkat.sprite().addAnimation("WalkDown", 16, 9, 30);
+	karkat.sprite().addAnimation("WalkLeft", 44, 8, 30);
+	karkat.sprite().addAnimation("WalkRight", 25, 9, 30);
+	karkat.sprite().addAnimation("WalkUp", 34, 8, 30);
+	karkat.sprite().addAnimation("Idle", 16, 9, 7);
+	karkat.sprite().setAnimation("Idle");
 }
 
 FlippyState::~FlippyState()
@@ -38,25 +51,25 @@ State* FlippyState::handleInput(Engine* engine, SDL_Event event)
 State* FlippyState::update(Engine* engine)
 {
 	const Uint8* k{ SDL_GetKeyboardState(nullptr) };
-	fuck.setV(
-		(int)k[SDL_SCANCODE_UP] * Vec2(0, -fuck.speed) 
-		+ (int)k[SDL_SCANCODE_DOWN] * Vec2(0, fuck.speed) 
-		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-fuck.speed, 0) 
-		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(fuck.speed, 0) 
+	vriska.setV(
+		(int)k[SDL_SCANCODE_UP] * Vec2(0, -vriska.speed) 
+		+ (int)k[SDL_SCANCODE_DOWN] * Vec2(0, vriska.speed) 
+		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-vriska.speed, 0) 
+		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(vriska.speed, 0) 
 	);
 
 	if (k[SDL_SCANCODE_UP])
-		fuck.sprite().setAnimation("WalkUp");
+		vriska.sprite().setAnimation("WalkUp");
 	else if (k[SDL_SCANCODE_DOWN])
-		fuck.sprite().setAnimation("WalkDown");
+		vriska.sprite().setAnimation("WalkDown");
 	else if (k[SDL_SCANCODE_LEFT])
-		fuck.sprite().setAnimation("WalkLeft");
+		vriska.sprite().setAnimation("WalkLeft");
 	else if (k[SDL_SCANCODE_RIGHT])
-		fuck.sprite().setAnimation("WalkRight");
+		vriska.sprite().setAnimation("WalkRight");
 	else
-		fuck.sprite().setAnimation("Idle");
+		vriska.sprite().setAnimation("Idle");
 
-	fuck.position() += fuck.v();
+	vriska.position() += vriska.v();
 	return nullptr;
 }
 void FlippyState::exit(Engine* engine)

@@ -113,7 +113,7 @@ void Engine::setState(State* state)
 void Engine::render()
 {
 	SDL_RenderClear(_renderer);
-	for(Actor* actor : _state->actors())
+	for(Actor* actor : _state->scene()[0])
 	{
 		SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
 		SDL_Rect dstRect{

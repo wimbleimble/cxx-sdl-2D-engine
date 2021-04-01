@@ -25,6 +25,10 @@ Sprite::Sprite(SDL_Renderer* context, const std::string& path, int frames)
 Sprite::Sprite(const Sprite& sprite)
 	: _frames{ sprite._frames },
 	_context{ sprite._context },
+	_animations{},
+	_currentAnimation{},
+	_frameTimer{},
+	_currentFrame{},
 
 	//set by loadTexture
 	_texture{},
@@ -77,7 +81,8 @@ void Sprite::addAnimation(
 
 void Sprite::setAnimation(const std::string& animation)
 {
-	if (_animations.find(animation) != _animations.end() && animation != _currentAnimation)
+	if (_animations.find(animation) != _animations.end()
+		&& animation != _currentAnimation)
 	{
 		_currentFrame = 0;
 		_currentAnimation = animation;

@@ -9,6 +9,7 @@ class Actor
 protected:
 	Sprite _sprite;
 	Vec2 _position;
+	int _zIndex;
 
 public:
 	Actor(SDL_Renderer* context, const std::string& path, int frames = 1);
@@ -24,6 +25,10 @@ public:
 	Sprite& sprite();
 
 	void setPosition(const Vec2& position);
+	void setZIndex(int zIndex);
+
+	//typecasts
+	bool operator > (const Actor& actor) const;
 };
 
 #endif

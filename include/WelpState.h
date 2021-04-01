@@ -1,12 +1,12 @@
 #ifndef WELPSTATE_H
 #define WELPSTATE_H
 #include "State.h"
-#include "Fuck.h"
+#include "Character.h"
 
 class WelpState : public State
 {
 
-	Fuck fuck;
+	Character fuck;
 	
 public:
 	WelpState(Engine* engine);

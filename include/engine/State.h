@@ -4,13 +4,13 @@
 
 #include <vector>
 
-#include "Actor.h"
+#include "Layer.h"
 
 class Engine;
 class State 
 {
 protected:
-	std::vector<Actor*> _actors;
+	std::vector<Layer> _scene;
 	State() = default;
 
 public:
@@ -20,7 +20,7 @@ public:
 	virtual State* handleInput(Engine* engine, SDL_Event event) = 0;
 	virtual State* update(Engine* engine) = 0;
 	virtual void exit(Engine* engine) = 0;
-	const std::vector<Actor*>& actors() const;
+	const std::vector<Layer>& scene() const;
 };
 
 #endif
