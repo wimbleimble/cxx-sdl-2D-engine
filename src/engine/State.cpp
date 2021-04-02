@@ -1,6 +1,11 @@
 #include "State.h"
 
-const std::vector<Layer>& State::scene() const
+const Scene& State::scene() const
 {
 	return _scene;
+}
+
+State::State(int layers)
+	: _scene{ layers }
+{
 }

@@ -4,9 +4,8 @@
 
 
 WelpState::WelpState(Engine* engine)
-	: State{}, fuck { engine->renderer(), "fuck.png", 1}
+	: State{ 1 }, fuck { engine->renderer(), "fuck.png", 1}
 {
-	_scene.push_back(Layer());
 	_scene[0].addActor(&fuck);
 }
 

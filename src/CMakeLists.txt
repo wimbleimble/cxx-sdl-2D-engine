@@ -21,6 +21,7 @@ set(src
 	engine/State.cpp
 	engine/Actor.cpp
 	engine/Layer.cpp
+	engine/Scene.cpp
 	Character.cpp
 	FlippyState.cpp
 	WelpState.cpp

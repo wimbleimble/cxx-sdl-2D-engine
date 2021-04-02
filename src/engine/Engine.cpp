@@ -113,22 +113,25 @@ void Engine::setState(State* state)
 void Engine::render()
 {
 	SDL_RenderClear(_renderer);
-	for(Actor* actor : _state->scene()[0])
+	for(const Layer& layer : _state->scene())
 	{
-		SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
-		SDL_Rect dstRect{
-			actor->position().x(),
-			actor->position().y(),
-			actor->sprite().width(),
-			actor->sprite().height()
-		};
+		for(Actor* actor : layer)
+		{
+			SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
+			SDL_Rect dstRect{
+				actor->position().x(),
+				actor->position().y(),
+				actor->sprite().width(),
+				actor->sprite().height()
+			};
 
-		SDL_RenderCopy(
-			_renderer,
-			actor->sprite().texture(),
-			&srcRect,
-			&dstRect
-		);
+			SDL_RenderCopy(
+				_renderer,
+				actor->sprite().texture(),
+				&srcRect,
+				&dstRect
+			);
+		}
 	}
 	SDL_RenderPresent(_renderer);
 }

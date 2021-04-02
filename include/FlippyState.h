@@ -10,6 +10,14 @@ class FlippyState : public State
 	Character vriska;
 	Character karkat;
 
+	enum class Layers
+	{
+		BACKGROUND,
+		OBJECTS,
+		UI,
+		MAX_LAYERS
+
+	};
 
 public:
 	FlippyState(Engine* engine);

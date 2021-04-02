@@ -34,6 +34,7 @@ int main(int argc, char* args[])
 			break;
 		case Err::Type::SDLHandler:
 			std::cout << "SDLHandler Err: " << err.info() << '\n';
+			break;
 		default:
 			std::cout << "Unknown error, info: " << err.info() << '\n';
 		}

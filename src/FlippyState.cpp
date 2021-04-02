@@ -5,15 +5,14 @@
 #include <iostream>
 
 FlippyState::FlippyState(Engine* engine)
-	: State{},
+	: State{ (int)Layers::MAX_LAYERS },
 	vriska{ engine->renderer(), "vriska.png", 138 },
 	karkat{ engine->renderer(), "karkat.png", 141 }
 {
 	vriska.setZIndex(69);
 
-	_scene.push_back(Layer());
-	_scene[0].addActor(&vriska);
-	_scene[0].addActor(&karkat);
+	_scene[(int)Layers::OBJECTS].addActor(&vriska);
+	_scene[(int)Layers::OBJECTS].addActor(&karkat);
 
 	vriska.sprite().addAnimation("WalkDown", 16, 9, 30);
 	vriska.sprite().addAnimation("WalkLeft", 44, 8, 30);
@@ -42,6 +41,10 @@ State* FlippyState::handleInput(Engine* engine, SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{
+	case SDLK_SPACE:
+		_scene[(int)Layers::OBJECTS].removeActor(&vriska);
+		_scene[(int)Layers::BACKGROUND].addActor(&vriska);
+		break;
 	case SDLK_TAB:
 		return new WelpState(engine);
 	}
