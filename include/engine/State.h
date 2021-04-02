@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Scene.h"
+#include "Camera.h"
 
 class Engine;
 class State 
@@ -12,6 +13,7 @@ class State
 
 protected:
 	Scene _scene;
+	Camera _camera;
 
 public:
 
@@ -25,6 +27,7 @@ public:
 	virtual State* update(Engine* engine) = 0;
 	virtual void exit(Engine* engine) = 0;
 	const Scene& scene() const;
+	const Camera& camera() const;
 };
 
 #endif

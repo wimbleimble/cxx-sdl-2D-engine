@@ -17,9 +17,9 @@ Engine::Engine(const WindowParams& windowParams)
 	_run{ true }
 {
 	if (_window == nullptr)
-		throw Err(SDL_GetError(), Err::Type::SDL); 
+		throw Err(SDL_GetError(), Err::Type::SDL);
 
-	_renderer = SDL_CreateRenderer(_window, 
+	_renderer = SDL_CreateRenderer(_window,
 		-1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 	);
@@ -53,19 +53,19 @@ int Engine::exec(State* entryState)
 			(currentTime - prevTime) * 1000
 			/
 			static_cast<double>(SDL_GetPerformanceFrequency())
-		);
+			);
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
-				case SDL_QUIT:
-					_run = false;
-					continue;
-				case SDL_KEYDOWN:
-					newState = _state->handleInput(this, event);
-					break;
+			case SDL_QUIT:
+				_run = false;
+				continue;
+			case SDL_KEYDOWN:
+				newState = _state->handleInput(this, event);
+				break;
 			}
-		} 
+		}
 		if (newState != nullptr)
 		{
 			setState(newState);
@@ -113,16 +113,23 @@ void Engine::setState(State* state)
 void Engine::render()
 {
 	SDL_RenderClear(_renderer);
-	for(const Layer& layer : _state->scene())
+	int winWidth{};
+	int winHeight{};
+	SDL_GetWindowSize(_window, &winWidth, &winHeight);
+	for (const Layer& layer : _state->scene())
 	{
-		for(Actor* actor : layer)
+		for (Actor* actor : layer)
 		{
 			SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
 			SDL_Rect dstRect{
-				actor->position().x(),
-				actor->position().y(),
-				actor->sprite().width(),
-				actor->sprite().height()
+				(actor->position().x() - actor->width() / 2)
+				- (_state->camera().position().x() - winWidth / 2),
+
+				(actor->position().y() - actor->height() / 2)
+				- (_state->camera().position().y() - winHeight / 2),
+
+				actor->width(),
+				actor->height()
 			};
 
 			SDL_RenderCopy(

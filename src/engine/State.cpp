@@ -1,11 +1,16 @@
 #include "State.h"
 
+State::State(int layers)
+	: _scene{ layers }, _camera{}
+{
+}
+
 const Scene& State::scene() const
 {
 	return _scene;
 }
 
-State::State(int layers)
-	: _scene{ layers }
+const Camera& State::camera() const
 {
+	return _camera;
 }

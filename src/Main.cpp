@@ -4,15 +4,6 @@
 #include "Engine.h"
 #include "FlippyState.h"
 
-enum class DirectionTexture
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	NUM_DIR
-};
-
 int main(int argc, char* args[])
 {
 	LogHandler logHandler{};

@@ -22,9 +22,10 @@ set(src
 	engine/Actor.cpp
 	engine/Layer.cpp
 	engine/Scene.cpp
-	Character.cpp
+	engine/Camera.cpp
 	FlippyState.cpp
 	WelpState.cpp
+	Character.cpp
 )
 
 find_package(SDL2 REQUIRED)

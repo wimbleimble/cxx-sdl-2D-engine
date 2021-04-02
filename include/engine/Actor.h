@@ -20,11 +20,14 @@ public:
 
 	const Sprite& sprite() const;
 	const Vec2& position() const;
+	int width() const;
+	int height() const;
 	
 	Vec2& position();
 	Sprite& sprite();
 
 	void setPosition(const Vec2& position);
+	void setPosition(int x, int y);
 	void setZIndex(int zIndex);
 
 	//typecasts

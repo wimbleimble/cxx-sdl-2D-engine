@@ -19,13 +19,30 @@ const Vec2& Actor::position() const
 {
 	return _position;
 }
+
+int Actor::width() const
+{
+	return _sprite.width();
+}
+
+int Actor::height() const
+{
+	return _sprite.height();
+}
+
 Vec2& Actor::position()
 {
 	return _position;
 }
+
 void Actor::setPosition(const Vec2& position)
 {
 	_position = position;
+}
+
+void Actor::setPosition(int x, int y)
+{
+	setPosition(Vec2(x, y));
 }
 
 void Actor::setZIndex(int zIndex)

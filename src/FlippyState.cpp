@@ -55,10 +55,16 @@ State* FlippyState::update(Engine* engine)
 {
 	const Uint8* k{ SDL_GetKeyboardState(nullptr) };
 	vriska.setV(
-		(int)k[SDL_SCANCODE_UP] * Vec2(0, -vriska.speed) 
-		+ (int)k[SDL_SCANCODE_DOWN] * Vec2(0, vriska.speed) 
-		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-vriska.speed, 0) 
-		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(vriska.speed, 0) 
+		(int)k[SDL_SCANCODE_UP] * Vec2(0, -vriska.speed)
+		+ (int)k[SDL_SCANCODE_DOWN] * Vec2(0, vriska.speed)
+		+ (int)k[SDL_SCANCODE_LEFT] * Vec2(-vriska.speed, 0)
+		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(vriska.speed, 0)
+	);
+	Vec2 cameraV(
+		(int)k[SDL_SCANCODE_K] * Vec2(0, -vriska.speed)
+		+ (int)k[SDL_SCANCODE_J] * Vec2(0, vriska.speed)
+		+ (int)k[SDL_SCANCODE_H] * Vec2(-vriska.speed, 0)
+		+ (int)k[SDL_SCANCODE_L] * Vec2(vriska.speed, 0)
 	);
 
 	if (k[SDL_SCANCODE_UP])
@@ -73,6 +79,7 @@ State* FlippyState::update(Engine* engine)
 		vriska.sprite().setAnimation("Idle");
 
 	vriska.position() += vriska.v();
+	_camera.position() += cameraV;
 	return nullptr;
 }
 void FlippyState::exit(Engine* engine)
