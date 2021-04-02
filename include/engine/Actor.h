@@ -5,7 +5,7 @@
 
 class Actor
 {
-	
+
 protected:
 	Sprite _sprite;
 	Vec2 _position;
@@ -17,12 +17,13 @@ public:
 
 	virtual void update() = 0;
 	virtual bool visible() const = 0;
+	virtual bool sticky() const = 0;
 
 	const Sprite& sprite() const;
 	const Vec2& position() const;
 	int width() const;
 	int height() const;
-	
+
 	Vec2& position();
 	Sprite& sprite();
 

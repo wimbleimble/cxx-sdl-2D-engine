@@ -26,6 +26,7 @@ set(src
 	FlippyState.cpp
 	WelpState.cpp
 	Character.cpp
+	Ui.cpp
 )
 
 find_package(SDL2 REQUIRED)

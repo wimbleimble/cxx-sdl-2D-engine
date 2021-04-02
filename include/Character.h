@@ -1,7 +1,6 @@
-#ifndef FUCK_H
-#define FUCK_H
+#ifndef CHARACTER_H
+#define CHARACTER_H
 #include "Actor.h"
-#include "Sprite.h"
 
 class Character : public Actor
 {
@@ -13,6 +12,7 @@ public:
 
 	virtual void update();
 	virtual bool visible() const;
+	virtual bool sticky() const;
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);

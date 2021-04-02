@@ -7,12 +7,15 @@
 FlippyState::FlippyState(Engine* engine)
 	: State{ (int)Layers::MAX_LAYERS },
 	vriska{ engine->renderer(), "vriska.png", 138 },
-	karkat{ engine->renderer(), "karkat.png", 141 }
+	karkat{ engine->renderer(), "karkat.png", 141 },
+	smiley{ engine->renderer(), "smiley.png", 1 }
 {
 	vriska.setZIndex(69);
+	smiley.setPosition(69, 69);
 
 	_scene[(int)Layers::OBJECTS].addActor(&vriska);
 	_scene[(int)Layers::OBJECTS].addActor(&karkat);
+	_scene[(int)Layers::UI].addActor(&smiley);
 
 	vriska.sprite().addAnimation("WalkDown", 16, 9, 30);
 	vriska.sprite().addAnimation("WalkLeft", 44, 8, 30);
@@ -37,7 +40,7 @@ void FlippyState::enter(Engine* engine)
 {
 }
 
-State* FlippyState::handleInput(Engine* engine, SDL_Event event)
+State* FlippyState::handleEvent(Engine* engine, SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{

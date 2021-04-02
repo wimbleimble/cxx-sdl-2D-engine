@@ -8,7 +8,7 @@
 #include "Camera.h"
 
 class Engine;
-class State 
+class State
 {
 
 protected:
@@ -23,7 +23,7 @@ public:
 	virtual ~State() {};
 
 	virtual void enter(Engine* engine) = 0;
-	virtual State* handleInput(Engine* engine, SDL_Event event) = 0;
+	virtual State* handleEvent(Engine* engine, SDL_Event event) = 0;
 	virtual State* update(Engine* engine) = 0;
 	virtual void exit(Engine* engine) = 0;
 	const Scene& scene() const;

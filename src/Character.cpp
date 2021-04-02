@@ -16,6 +16,11 @@ bool Character::visible() const
 	return true;
 }
 
+bool Character::sticky() const
+{
+	return false;
+}
+
 const Vec2& Character::v() const
 {
 	return _v;

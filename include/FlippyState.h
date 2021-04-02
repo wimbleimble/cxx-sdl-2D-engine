@@ -2,13 +2,14 @@
 #define FLIPPYSTATE_H
 #include "State.h"
 #include "Character.h"
-#include "Sprite.h"
+#include "Ui.h"
 
 class FlippyState : public State
 {
 
 	Character vriska;
 	Character karkat;
+	Ui smiley;
 
 	enum class Layers
 	{
@@ -24,7 +25,7 @@ public:
 	~FlippyState();
 
 	virtual void enter(Engine* engine);
-	virtual State* handleInput(Engine* engine, SDL_Event event);
+	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
 	virtual void exit(Engine* engine);
 

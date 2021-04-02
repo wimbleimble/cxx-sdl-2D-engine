@@ -6,7 +6,7 @@ Vec2::Vec2()
 }
 
 Vec2::Vec2(int x, int y)
-	: _x{x}, _y{y}
+	: _x{ x }, _y{ y }
 {
 }
 
@@ -32,6 +32,12 @@ void Vec2::setX(int x)
 void Vec2::setY(int y)
 {
 	_y = y;
+}
+
+void Vec2::set(int x, int y)
+{
+	setX(x);
+	setY(y);
 }
 
 Vec2& Vec2::operator+=(const Vec2& vec)

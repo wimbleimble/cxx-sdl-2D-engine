@@ -16,6 +16,7 @@ public:
 	int y() const;
 	void setX(int x);
 	void setY(int y);
+	void set(int x, int y);
 	void add(const Vec2& vec);
 
 	Vec2& operator+=(const Vec2& vec);

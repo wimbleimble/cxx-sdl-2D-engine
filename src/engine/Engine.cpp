@@ -62,7 +62,7 @@ int Engine::exec(State* entryState)
 				_run = false;
 				continue;
 			case SDL_KEYDOWN:
-				newState = _state->handleInput(this, event);
+				newState = _state->handleEvent(this, event);
 				break;
 			}
 		}
@@ -120,14 +120,18 @@ void Engine::render()
 	{
 		for (Actor* actor : layer)
 		{
+			int camOffsetX{ 0 };
+			int camOffsetY{ 0 };
+			if (!actor->sticky())
+			{
+				camOffsetX = _state->camera().position().x() - winWidth / 2;
+				camOffsetY = _state->camera().position().y() - winHeight / 2;
+			}
+
 			SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
 			SDL_Rect dstRect{
-				(actor->position().x() - actor->width() / 2)
-				- (_state->camera().position().x() - winWidth / 2),
-
-				(actor->position().y() - actor->height() / 2)
-				- (_state->camera().position().y() - winHeight / 2),
-
+				(actor->position().x() - actor->width() / 2) - camOffsetX,
+				(actor->position().y() - actor->height() / 2) - camOffsetY,
 				actor->width(),
 				actor->height()
 			};
