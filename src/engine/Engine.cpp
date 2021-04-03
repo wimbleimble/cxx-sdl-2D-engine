@@ -116,6 +116,7 @@ void Engine::render()
 	int winWidth{};
 	int winHeight{};
 	SDL_GetWindowSize(_window, &winWidth, &winHeight);
+
 	for (const Layer& layer : _state->scene())
 	{
 		for (Actor* actor : layer)
@@ -128,7 +129,7 @@ void Engine::render()
 				camOffsetY = _state->camera().position().y() - winHeight / 2;
 			}
 
-			SDL_Rect srcRect{ actor->sprite().srcRect(_deltaTime) };
+			SDL_Rect srcRect{ actor->sprite()->srcRect(_deltaTime) };
 			SDL_Rect dstRect{
 				(actor->position().x() - actor->width() / 2) - camOffsetX,
 				(actor->position().y() - actor->height() / 2) - camOffsetY,
@@ -138,7 +139,7 @@ void Engine::render()
 
 			SDL_RenderCopy(
 				_renderer,
-				actor->sprite().texture(),
+				actor->sprite()->texture(),
 				&srcRect,
 				&dstRect
 			);

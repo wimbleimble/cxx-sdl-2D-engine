@@ -1,16 +1,26 @@
 #include "Actor.h"
 
-Actor::Actor(SDL_Renderer* context, const std::string& path, int frames)
-	: _sprite{ context, path, frames }, _position{}, _zIndex{ 0 }
+Actor::Actor(SDL_Renderer* context, const std::string& path)
+	: _sprite{ new Sprite(context, path) }, _position{}, _zIndex{ 0 }
 {
 }
 
-const Sprite& Actor::sprite() const
+Actor::Actor(Sprite* sprite)
+	: _sprite{ sprite }
+{
+}
+
+Actor::~Actor()
+{
+	delete _sprite;
+}
+
+Sprite* const Actor::sprite() const
 {
 	return _sprite;
 }
 
-Sprite& Actor::sprite()
+Sprite* Actor::sprite()
 {
 	return _sprite;
 }
@@ -22,12 +32,12 @@ const Vec2& Actor::position() const
 
 int Actor::width() const
 {
-	return _sprite.width();
+	return _sprite->width();
 }
 
 int Actor::height() const
 {
-	return _sprite.height();
+	return _sprite->height();
 }
 
 Vec2& Actor::position()

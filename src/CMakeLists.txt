@@ -17,6 +17,7 @@ set(src
 	engine/SDLHandler.cpp
 	engine/LogHandler.cpp
 	engine/Sprite.cpp
+	engine/AnimatedSprite.cpp
 	engine/Vec2.cpp
 	engine/State.cpp
 	engine/Actor.cpp

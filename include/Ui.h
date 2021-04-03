@@ -5,7 +5,7 @@
 class Ui : public Actor
 {
 public:
-	Ui(SDL_Renderer* context, const std::string& path, int frames);
+	Ui(SDL_Renderer* context, const std::string& path);
 	~Ui();
 
 	virtual void update();

@@ -6,9 +6,9 @@
 
 FlippyState::FlippyState(Engine* engine)
 	: State{ (int)Layers::MAX_LAYERS },
-	vriska{ engine->renderer(), "vriska.png", 138 },
-	karkat{ engine->renderer(), "karkat.png", 141 },
-	smiley{ engine->renderer(), "smiley.png", 1 }
+	vriska{ engine->renderer(), "vriska.png", 70, 88, 138 },
+	karkat{ engine->renderer(), "karkat.png", 67, 88, 141 },
+	smiley{ engine->renderer(), "smiley.png" }
 {
 	vriska.setZIndex(69);
 	smiley.setPosition(69, 69);
@@ -17,19 +17,19 @@ FlippyState::FlippyState(Engine* engine)
 	_scene[(int)Layers::OBJECTS].addActor(&karkat);
 	_scene[(int)Layers::UI].addActor(&smiley);
 
-	vriska.sprite().addAnimation("WalkDown", 16, 9, 30);
-	vriska.sprite().addAnimation("WalkLeft", 44, 8, 30);
-	vriska.sprite().addAnimation("WalkRight", 25, 9, 30);
-	vriska.sprite().addAnimation("WalkUp", 34, 8, 30);
-	vriska.sprite().addAnimation("Idle", 0, 1, 30);
-	vriska.sprite().setAnimation("Idle");
+	vriska.sprite()->addAnimation("WalkDown", 16, 9, 30);
+	vriska.sprite()->addAnimation("WalkLeft", 44, 8, 30);
+	vriska.sprite()->addAnimation("WalkRight", 25, 9, 30);
+	vriska.sprite()->addAnimation("WalkUp", 34, 8, 30);
+	vriska.sprite()->addAnimation("Idle", 0, 1, 30);
+	vriska.sprite()->setAnimation("Idle");
 
-	karkat.sprite().addAnimation("WalkDown", 16, 9, 30);
-	karkat.sprite().addAnimation("WalkLeft", 44, 8, 30);
-	karkat.sprite().addAnimation("WalkRight", 25, 9, 30);
-	karkat.sprite().addAnimation("WalkUp", 34, 8, 30);
-	karkat.sprite().addAnimation("Idle", 16, 9, 7);
-	karkat.sprite().setAnimation("Idle");
+	karkat.sprite()->addAnimation("WalkDown", 16, 9, 30);
+	karkat.sprite()->addAnimation("WalkLeft", 44, 8, 30);
+	karkat.sprite()->addAnimation("WalkRight", 25, 9, 30);
+	karkat.sprite()->addAnimation("WalkUp", 34, 8, 30);
+	karkat.sprite()->addAnimation("Idle", 16, 9, 7);
+	karkat.sprite()->setAnimation("Idle");
 }
 
 FlippyState::~FlippyState()
@@ -64,22 +64,22 @@ State* FlippyState::update(Engine* engine)
 		+ (int)k[SDL_SCANCODE_RIGHT] * Vec2(vriska.speed, 0)
 	);
 	Vec2 cameraV(
-		(int)k[SDL_SCANCODE_K] * Vec2(0, -vriska.speed)
-		+ (int)k[SDL_SCANCODE_J] * Vec2(0, vriska.speed)
-		+ (int)k[SDL_SCANCODE_H] * Vec2(-vriska.speed, 0)
+		(int)k[SDL_SCANCODE_I] * Vec2(0, -vriska.speed)
+		+ (int)k[SDL_SCANCODE_K] * Vec2(0, vriska.speed)
+		+ (int)k[SDL_SCANCODE_J] * Vec2(-vriska.speed, 0)
 		+ (int)k[SDL_SCANCODE_L] * Vec2(vriska.speed, 0)
 	);
 
 	if (k[SDL_SCANCODE_UP])
-		vriska.sprite().setAnimation("WalkUp");
+		vriska.sprite()->setAnimation("WalkUp");
 	else if (k[SDL_SCANCODE_DOWN])
-		vriska.sprite().setAnimation("WalkDown");
+		vriska.sprite()->setAnimation("WalkDown");
 	else if (k[SDL_SCANCODE_LEFT])
-		vriska.sprite().setAnimation("WalkLeft");
+		vriska.sprite()->setAnimation("WalkLeft");
 	else if (k[SDL_SCANCODE_RIGHT])
-		vriska.sprite().setAnimation("WalkRight");
+		vriska.sprite()->setAnimation("WalkRight");
 	else
-		vriska.sprite().setAnimation("Idle");
+		vriska.sprite()->setAnimation("Idle");
 
 	vriska.position() += vriska.v();
 	_camera.position() += cameraV;

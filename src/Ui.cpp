@@ -1,7 +1,7 @@
 #include "Ui.h"
 
-Ui::Ui(SDL_Renderer* context, const std::string& path, int frames)
-	: Actor{ context, path, frames }
+Ui::Ui(SDL_Renderer* context, const std::string& path)
+	: Actor{ context, path }
 {
 }
 
