@@ -1,5 +1,11 @@
 #include "Ui.h"
 
+#include <string>
+
+#include "SDL.h"
+
+#include "Camera.h"
+
 Ui::Ui(SDL_Renderer* context, const std::string& path)
 	: Actor{ context, path }
 {
@@ -16,7 +22,9 @@ bool Ui::visible() const
 	return true;
 }
 
-bool Ui::sticky() const
+void Ui::render(Renderer& renderer,
+	const Camera& camera,
+	double deltaTime)
 {
-	return true;
+	Actor::render(renderer, Camera(), deltaTime);
 }

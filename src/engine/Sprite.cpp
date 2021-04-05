@@ -1,7 +1,9 @@
 #include "Sprite.h"
-#include "Err.h"
+
 #include <cassert>
 #include <iostream>
+
+#include "Err.h"
 
 Sprite::Sprite(SDL_Renderer* context, const std::string& path)
 	: _context{ context },

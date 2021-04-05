@@ -1,5 +1,13 @@
 #include "Actor.h"
 
+#include <string>
+
+#include "SDL.h"
+
+#include "Sprite.h"
+#include "Camera.h"
+#include "Renderer.h"
+
 Actor::Actor(SDL_Renderer* context, const std::string& path)
 	: _sprite{ new Sprite(context, path) }, _position{}, _zIndex{ 0 }
 {
@@ -63,4 +71,24 @@ void Actor::setZIndex(int zIndex)
 bool Actor::operator > (const Actor& actor) const
 {
 	return _zIndex > actor._zIndex;
+}
+
+void Actor::render(Renderer& renderer,
+	const Camera& camera,
+	double deltaTime)
+{
+	SDL_Rect srcRect{ sprite()->srcRect(deltaTime) };
+	SDL_Rect dstRect{
+		(position().x() - width() / 2)
+		- (camera.position().x() - renderer.winWidth() / 2),
+
+		(position().y() - height() / 2)
+		- (camera.position().y() - renderer.winHeight() / 2),
+
+		width(),
+
+		height()
+	};
+	renderer.renderTexture(sprite()->texture(), srcRect, dstRect);
+
 }

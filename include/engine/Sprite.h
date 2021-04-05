@@ -2,9 +2,9 @@
 #define SPRITE_H
 #include <string>
 #include <map>
+
 #include "SDL.h"
 #include "SDL_image.h"
-#include "Vec2.h"
 
 class Sprite
 {
@@ -29,8 +29,8 @@ public:
 
 	~Sprite();
 
-	int width() const;
-	int height() const;
+	virtual int width() const;
+	virtual int height() const;
 	int sourceWidth() const;
 	int sourceHeight() const;
 	SDL_Texture* texture();

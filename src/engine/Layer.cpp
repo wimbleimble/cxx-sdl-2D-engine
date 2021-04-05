@@ -1,6 +1,9 @@
 #include "Layer.h"
+
 #include <algorithm>
 #include <cassert>
+
+#include "Actor.h"
 
 Layer::~Layer()
 {
@@ -10,7 +13,7 @@ void Layer::sort()
 {
 	std::sort(_vec.begin(), _vec.end(), [](Actor* a, Actor* b) {
 		return *b > *a;
-	});
+		});
 }
 
 

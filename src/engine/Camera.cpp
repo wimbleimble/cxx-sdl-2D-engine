@@ -1,6 +1,5 @@
 #include "Camera.h"
 
-
 const Vec2& Camera::position() const
 {
 	return _position;

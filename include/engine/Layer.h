@@ -1,7 +1,8 @@
 #ifndef LAYER_H 
 #define LAYER_H
 #include <vector>
-#include "Actor.h"
+
+class Actor;
 
 class Layer
 {

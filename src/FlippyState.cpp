@@ -1,5 +1,6 @@
 #include "FlippyState.h"
 #include "Engine.h"
+#include "AnimatedSprite.h"
 #include "WelpState.h"
 
 #include <iostream>
@@ -11,25 +12,24 @@ FlippyState::FlippyState(Engine* engine)
 	smiley{ engine->renderer(), "smiley.png" }
 {
 	vriska.setZIndex(69);
-	smiley.setPosition(69, 69);
 
 	_scene[(int)Layers::OBJECTS].addActor(&vriska);
 	_scene[(int)Layers::OBJECTS].addActor(&karkat);
 	_scene[(int)Layers::UI].addActor(&smiley);
 
-	vriska.sprite()->addAnimation("WalkDown", 16, 9, 30);
-	vriska.sprite()->addAnimation("WalkLeft", 44, 8, 30);
-	vriska.sprite()->addAnimation("WalkRight", 25, 9, 30);
-	vriska.sprite()->addAnimation("WalkUp", 34, 8, 30);
-	vriska.sprite()->addAnimation("Idle", 0, 1, 30);
-	vriska.sprite()->setAnimation("Idle");
+	vriska.animatedSprite()->addAnimation("WalkDown", 16, 9, 30);
+	vriska.animatedSprite()->addAnimation("WalkLeft", 44, 8, 30);
+	vriska.animatedSprite()->addAnimation("WalkRight", 25, 9, 30);
+	vriska.animatedSprite()->addAnimation("WalkUp", 34, 8, 30);
+	vriska.animatedSprite()->addAnimation("Idle", 0, 1, 30);
+	vriska.animatedSprite()->setAnimation("Idle");
 
-	karkat.sprite()->addAnimation("WalkDown", 16, 9, 30);
-	karkat.sprite()->addAnimation("WalkLeft", 44, 8, 30);
-	karkat.sprite()->addAnimation("WalkRight", 25, 9, 30);
-	karkat.sprite()->addAnimation("WalkUp", 34, 8, 30);
-	karkat.sprite()->addAnimation("Idle", 16, 9, 7);
-	karkat.sprite()->setAnimation("Idle");
+	karkat.animatedSprite()->addAnimation("WalkDown", 16, 9, 30);
+	karkat.animatedSprite()->addAnimation("WalkLeft", 44, 8, 30);
+	karkat.animatedSprite()->addAnimation("WalkRight", 25, 9, 30);
+	karkat.animatedSprite()->addAnimation("WalkUp", 34, 8, 30);
+	karkat.animatedSprite()->addAnimation("Idle", 16, 9, 7);
+	karkat.animatedSprite()->setAnimation("Idle");
 }
 
 FlippyState::~FlippyState()
@@ -71,15 +71,15 @@ State* FlippyState::update(Engine* engine)
 	);
 
 	if (k[SDL_SCANCODE_UP])
-		vriska.sprite()->setAnimation("WalkUp");
+		vriska.animatedSprite()->setAnimation("WalkUp");
 	else if (k[SDL_SCANCODE_DOWN])
-		vriska.sprite()->setAnimation("WalkDown");
+		vriska.animatedSprite()->setAnimation("WalkDown");
 	else if (k[SDL_SCANCODE_LEFT])
-		vriska.sprite()->setAnimation("WalkLeft");
+		vriska.animatedSprite()->setAnimation("WalkLeft");
 	else if (k[SDL_SCANCODE_RIGHT])
-		vriska.sprite()->setAnimation("WalkRight");
+		vriska.animatedSprite()->setAnimation("WalkRight");
 	else
-		vriska.sprite()->setAnimation("Idle");
+		vriska.animatedSprite()->setAnimation("Idle");
 
 	vriska.position() += vriska.v();
 	_camera.position() += cameraV;

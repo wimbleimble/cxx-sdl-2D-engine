@@ -1,7 +1,12 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
+#include <string>
+
+#include "SDL.h"
+
 #include "Actor.h"
-#include "AnimatedSprite.h"
+
+class AnimatedSprite;
 
 class Character : public Actor
 {
@@ -17,9 +22,10 @@ public:
 
 	virtual void update();
 	virtual bool visible() const;
-	virtual bool sticky() const;
 
-	AnimatedSprite* sprite();
+	Sprite* sprite();
+
+	AnimatedSprite* animatedSprite();
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);

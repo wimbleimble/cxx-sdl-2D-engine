@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "AnimatedSprite.h"
 
 Character::Character(SDL_Renderer* context,
 	const std::string& path,
@@ -21,11 +22,6 @@ bool Character::visible() const
 	return true;
 }
 
-bool Character::sticky() const
-{
-	return false;
-}
-
 const Vec2& Character::v() const
 {
 	return _v;
@@ -36,7 +32,7 @@ void Character::setV(const Vec2& v)
 	_v = v;
 }
 
-AnimatedSprite* Character::sprite()
+AnimatedSprite* Character::animatedSprite()
 {
 	return static_cast<AnimatedSprite*>(_sprite);
 }

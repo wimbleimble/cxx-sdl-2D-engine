@@ -3,9 +3,6 @@
 #include "Sprite.h"
 #include <string>
 #include <map>
-#include "SDL.h"
-#include "SDL_image.h"
-#include "Vec2.h"
 
 class AnimatedSprite : public Sprite
 {

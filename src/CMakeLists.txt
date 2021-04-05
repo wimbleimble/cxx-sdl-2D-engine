@@ -13,6 +13,7 @@ project(SDLTest VERSION 0.0.1
 set(src
 	Main.cpp
 	engine/Engine.cpp
+	engine/Renderer.cpp
 	engine/Err.cpp
 	engine/SDLHandler.cpp
 	engine/LogHandler.cpp

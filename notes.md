@@ -8,8 +8,6 @@
 *	viewport culling AABB COLLISION - might not be necessary: open gl will cull
 	for me, need to do tests when i have something more intesive.
 *	tilemaps - split sprite into animated sprite and tilemap
-*	make sprite return reference rather than pointer - look up that thing about
-	default implementations?
 
 ## THINGS THAT MAY CAUSE PROBLEMS LATER:
 -	SDLImage paths resolve based on where the application is launched, and so

@@ -1,5 +1,6 @@
 #ifndef SCENE_H
 #define SCENE_H
+
 #include "Layer.h"
 
 class Scene

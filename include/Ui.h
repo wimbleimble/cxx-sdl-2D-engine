@@ -9,8 +9,10 @@ public:
 	~Ui();
 
 	virtual void update();
+	virtual void render(Renderer& renderer,
+		const Camera& camera,
+		double detlaTime);
 	virtual bool visible() const;
-	virtual bool sticky() const;
 };
 
 #endif

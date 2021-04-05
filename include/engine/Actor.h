@@ -1,7 +1,14 @@
 #ifndef ACTOR_H
 #define ACTOR_H
-#include "Sprite.h"
+#include <string>
+
+#include "SDL.h"
+
 #include "Vec2.h"
+
+class Sprite;
+class Renderer;
+class Camera;
 
 class Actor
 {
@@ -19,7 +26,6 @@ public:
 
 	virtual void update() = 0;
 	virtual bool visible() const = 0;
-	virtual bool sticky() const = 0;
 
 	Sprite* const sprite() const;
 	const Vec2& position() const;
@@ -28,6 +34,9 @@ public:
 
 	Vec2& position();
 	Sprite* sprite();
+	virtual void render(Renderer& renderer,
+		const Camera& camera,
+		double deltaTime);
 
 	void setPosition(const Vec2& position);
 	void setPosition(int x, int y);
