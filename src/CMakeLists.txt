@@ -25,10 +25,12 @@ set(src
 	engine/Layer.cpp
 	engine/Scene.cpp
 	engine/Camera.cpp
+	engine/TileAtlas.cpp
+	engine/TileMap.cpp
 	FlippyState.cpp
 	WelpState.cpp
 	Character.cpp
-	Ui.cpp
+	engine/Ui.cpp
 )
 
 find_package(SDL2 REQUIRED)

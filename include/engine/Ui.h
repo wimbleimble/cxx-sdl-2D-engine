@@ -11,7 +11,7 @@ public:
 	virtual void update();
 	virtual void render(Renderer& renderer,
 		const Camera& camera,
-		double detlaTime);
+		double deltaTime);
 	virtual bool visible() const;
 };
 

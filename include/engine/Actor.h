@@ -29,8 +29,8 @@ public:
 
 	Sprite* const sprite() const;
 	const Vec2& position() const;
-	int width() const;
-	int height() const;
+	virtual int width() const;
+	virtual int height() const;
 
 	Vec2& position();
 	Sprite* sprite();

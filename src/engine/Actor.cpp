@@ -77,8 +77,8 @@ void Actor::render(Renderer& renderer,
 	const Camera& camera,
 	double deltaTime)
 {
-	SDL_Rect srcRect{ sprite()->srcRect(deltaTime) };
-	SDL_Rect dstRect{
+	const SDL_Rect srcRect{ sprite()->srcRect(deltaTime) };
+	const SDL_Rect dstRect{
 		(position().x() - width() / 2)
 		- (camera.position().x() - renderer.winWidth() / 2),
 

@@ -20,14 +20,11 @@ public:
 
 	~TileAtlas();
 
-	virtual SDL_Rect srcRect(double deltaTime);
+	int registerTile(int x, int y, int width, int height);
 
-	virtual int width();
-	virtual int height();
+	int numTiles() const;
 
-	void registerTile(int x, int y, int width, int height);
-
-	const SDL_Rect const* operator[](int index) const;
+	const SDL_Rect& operator[](int index) const;
 	TileAtlas& operator=(const TileAtlas& sprite);
 };
 

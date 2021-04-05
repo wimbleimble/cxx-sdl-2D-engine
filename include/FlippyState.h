@@ -3,13 +3,14 @@
 #include "State.h"
 #include "Character.h"
 #include "Ui.h"
+#include "TileMap.h"
 
 class FlippyState : public State
 {
 
 	Character vriska;
 	Character karkat;
-	Ui smiley;
+	TileMap bg;
 
 	enum class Layers
 	{

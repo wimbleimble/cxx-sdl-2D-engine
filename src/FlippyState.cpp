@@ -1,6 +1,7 @@
 #include "FlippyState.h"
 #include "Engine.h"
 #include "AnimatedSprite.h"
+#include "TileAtlas.h"
 #include "WelpState.h"
 
 #include <iostream>
@@ -9,13 +10,30 @@ FlippyState::FlippyState(Engine* engine)
 	: State{ (int)Layers::MAX_LAYERS },
 	vriska{ engine->renderer(), "vriska.png", 70, 88, 138 },
 	karkat{ engine->renderer(), "karkat.png", 67, 88, 141 },
-	smiley{ engine->renderer(), "smiley.png" }
+	bg{ engine->renderer(), "tiles.png", 64, 64, 32, 32 }
 {
+	bg.atlas().registerTile(0, 8, 16, 16);
+	bg.atlas().registerTile(17, 8, 16, 16);
+	bg.atlas().registerTile(0, 56, 16, 16);
+
+	for (int row{}; row < bg.width(); ++row)
+	{
+		for (int col{}; col < bg.height(); ++col)
+		{
+			if ((row + col) % 2 == 0)
+				bg.setTile(row, col, 0);
+			else if ((row + col) % 3 == 0)
+				bg.setTile(row, col, 1);
+			else if ((row + col) % 5 == 0)
+				bg.setTile(row, col, 2);
+		}
+	}
+
 	vriska.setZIndex(69);
 
 	_scene[(int)Layers::OBJECTS].addActor(&vriska);
 	_scene[(int)Layers::OBJECTS].addActor(&karkat);
-	_scene[(int)Layers::UI].addActor(&smiley);
+	_scene[(int)Layers::BACKGROUND].addActor(&bg);
 
 	vriska.animatedSprite()->addAnimation("WalkDown", 16, 9, 30);
 	vriska.animatedSprite()->addAnimation("WalkLeft", 44, 8, 30);
