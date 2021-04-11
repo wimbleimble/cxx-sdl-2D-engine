@@ -14,6 +14,7 @@ set(src
 	Main.cpp
 	engine/Engine.cpp
 	engine/Renderer.cpp
+	engine/Input.cpp
 	engine/Err.cpp
 	engine/SDLHandler.cpp
 	engine/LogHandler.cpp
@@ -27,10 +28,10 @@ set(src
 	engine/Camera.cpp
 	engine/TileAtlas.cpp
 	engine/TileMap.cpp
-	FlippyState.cpp
-	WelpState.cpp
-	Character.cpp
 	engine/Ui.cpp
+	actors/Character.cpp
+	actors/Button.cpp
+	states/MenuState.cpp
 )
 
 find_package(SDL2 REQUIRED)
@@ -42,6 +43,8 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
 target_include_directories(${PROJECT_NAME} PUBLIC ../include/engine)
+target_include_directories(${PROJECT_NAME} PUBLIC ../include/states)
+target_include_directories(${PROJECT_NAME} PUBLIC ../include/actors)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
 

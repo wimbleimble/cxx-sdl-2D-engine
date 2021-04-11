@@ -8,6 +8,7 @@
 Engine::Engine(const Renderer::WindowParams& windowParams)
 	: _sdl{},
 	_renderer{ windowParams },
+	_input{},
 	_state{ nullptr },
 	_run{ true }
 {
@@ -45,6 +46,9 @@ int Engine::exec(State* entryState)
 			case SDL_QUIT:
 				_run = false;
 				continue;
+			case SDL_MOUSEMOTION:
+				_input.updateMousePosition();
+				break;
 			case SDL_KEYDOWN:
 				newState = _state->handleEvent(this, event);
 				break;
@@ -71,9 +75,19 @@ int Engine::exec(State* entryState)
 	return 0;
 }
 
-SDL_Renderer* Engine::renderer()
+const Renderer& Engine::renderer() const
 {
-	return _renderer.renderer();
+	return _renderer;
+}
+
+Renderer& Engine::renderer()
+{
+	return _renderer;
+}
+
+const Input& Engine::input()
+{
+	return _input;
 }
 
 double Engine::deltaTime() const
@@ -84,12 +98,8 @@ double Engine::deltaTime() const
 void Engine::setState(State* state)
 {
 	std::cout << "Changing state\n";
-	if (_state == nullptr)
-		_state = state;
-	else
-	{
+	if (_state != nullptr)
 		_state->exit(this);
-		_state = state;
-	}
+	_state = state;
 	_state->enter(this);
 }

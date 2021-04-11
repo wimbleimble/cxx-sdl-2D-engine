@@ -18,8 +18,8 @@ protected:
 
 public:
 
-	State() = default;
-	State(int layers);
+	State() = delete;
+	State(int screenWidth, int screenHeight, int layers = 1);
 
 	virtual ~State() {};
 

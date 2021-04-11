@@ -1,22 +1,24 @@
-#ifndef WELPSTATE_H
-#define WELPSTATE_H
+#ifndef MENUSTATE_H
+#define MENUSTATE_H
 #include "State.h"
-#include "Character.h"
+#include "Button.h"
 
-class WelpState : public State
+class Engine;
+
+
+class MenuState : public State
 {
 
-	Character fuck;
+	Button _startButton;
 
 public:
-	WelpState(Engine* engine);
-	~WelpState();
+	MenuState(Engine* engine);
+	~MenuState();
 
 	virtual void enter(Engine* engine);
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
 	virtual void exit(Engine* engine);
-
 };
 
 #endif

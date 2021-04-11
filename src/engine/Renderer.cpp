@@ -49,7 +49,7 @@ int Renderer::winHeight() const
 	return _winHeight;
 }
 
-SDL_Renderer* Renderer::renderer()
+SDL_Renderer* Renderer::context()
 {
 	return _renderer;
 }

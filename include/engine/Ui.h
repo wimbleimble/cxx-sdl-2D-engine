@@ -6,6 +6,7 @@ class Ui : public Actor
 {
 public:
 	Ui(SDL_Renderer* context, const std::string& path);
+	Ui(Sprite* sprite);
 	~Ui();
 
 	virtual void update();

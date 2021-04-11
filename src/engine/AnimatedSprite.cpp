@@ -34,12 +34,11 @@ AnimatedSprite::~AnimatedSprite()
 }
 
 void AnimatedSprite::addAnimation(
-	const std::string& name, int startFrame, int length, int frameRate
-)
+	const std::string& name, int startFrame, int length, int frameRate)
 {
 	assert(startFrame >= 0);
 	assert(startFrame < _frames);
-	assert(startFrame + length < _frames);
+	assert(startFrame + length <= _frames);
 	Animation animation{ startFrame, length, frameRate };
 	_animations.insert(std::pair<std::string, Animation>(name, animation));
 }

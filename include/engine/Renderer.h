@@ -29,7 +29,7 @@ public:
 
 	int winWidth() const;
 	int winHeight() const;
-	SDL_Renderer* renderer();
+	SDL_Renderer* context();
 
 	void renderState(State* state, double deltaTime);
 	void renderTexture(SDL_Texture* texture,

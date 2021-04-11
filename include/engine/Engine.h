@@ -7,14 +7,15 @@
 
 #include "SDLHandler.h"
 #include "Renderer.h"
+#include "Input.h"
 
 class State;
-
 class Engine
 {
 private:
 	const SDLHandler _sdl;
 	Renderer _renderer;
+	Input _input;
 	State* _state;
 	bool _run;
 	double _deltaTime;
@@ -25,7 +26,9 @@ public:
 	Engine(const Renderer::WindowParams& windowParams = { "Title", 640, 480 });
 	~Engine();
 
-	SDL_Renderer* renderer();
+	const Renderer& renderer() const;
+	Renderer& renderer();
+	const Input& input();
 	double deltaTime() const;
 
 	int exec(State* entryState);

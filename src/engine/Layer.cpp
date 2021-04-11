@@ -16,7 +16,6 @@ void Layer::sort()
 		});
 }
 
-
 void Layer::addActor(Actor* actor)
 {
 	_vec.push_back(actor);

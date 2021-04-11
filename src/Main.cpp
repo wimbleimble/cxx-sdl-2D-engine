@@ -2,7 +2,7 @@
 #include "LogHandler.h"
 #include "Err.h"
 #include "Engine.h"
-#include "FlippyState.h"
+#include "MenuState.h"
 
 int main(int argc, char* args[])
 {
@@ -10,7 +10,7 @@ int main(int argc, char* args[])
 	try
 	{
 		Engine engine{};
-		return engine.exec(new FlippyState(&engine));
+		return engine.exec(new MenuState(&engine));
 	}
 	catch (const Err& err)
 	{

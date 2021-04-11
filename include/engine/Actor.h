@@ -7,6 +7,7 @@
 #include "Vec2.h"
 
 class Sprite;
+class Engine;
 class Renderer;
 class Camera;
 
@@ -32,6 +33,8 @@ public:
 	virtual int width() const;
 	virtual int height() const;
 
+	bool mouseOver(const Engine* engine, const Camera& camera);
+
 	Vec2& position();
 	Sprite* sprite();
 	virtual void render(Renderer& renderer,
@@ -42,7 +45,6 @@ public:
 	void setPosition(int x, int y);
 	void setZIndex(int zIndex);
 
-	//typecasts
 	bool operator > (const Actor& actor) const;
 };
 

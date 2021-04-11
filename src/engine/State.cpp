@@ -1,6 +1,6 @@
 #include "State.h"
 
-State::State(int layers)
+State::State(int screenWidth, int screenHeight, int layers)
 	: _scene{ layers }, _camera{}
 {
 }
