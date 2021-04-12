@@ -15,6 +15,10 @@ class Renderer
 	int _winWidth;
 	int _winHeight;
 
+	int _renderWidth;
+	int _renderHeight;
+
+
 public:
 
 	struct WindowParams
@@ -24,12 +28,25 @@ public:
 		int height;
 	};
 
-	Renderer(const WindowParams& windowParams);
+	struct RenderParams
+	{
+		int width;
+		int height;
+	};
+
+	Renderer(const WindowParams& windowParams,
+		const RenderParams& renderParams);
 	~Renderer();
 
 	int winWidth() const;
 	int winHeight() const;
+
+	int renderWidth() const;
+	int renderHeight() const;
 	SDL_Renderer* context();
+
+	int widthScale() const;
+	int heightScale() const;
 
 	void renderState(State* state, double deltaTime);
 	void renderTexture(SDL_Texture* texture,

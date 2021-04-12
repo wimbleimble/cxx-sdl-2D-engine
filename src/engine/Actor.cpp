@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Renderer.h"
+#include "Input.h"
 
 Actor::Actor(SDL_Renderer* context, const std::string& path)
 	: _sprite{ new Sprite(context, path) }, _position{}, _zIndex{ 0 }
@@ -80,15 +81,34 @@ void Actor::render(Renderer& renderer,
 	const SDL_Rect srcRect{ sprite()->srcRect(deltaTime) };
 	const SDL_Rect dstRect{
 		(position().x() - width() / 2)
-		- (camera.position().x() - renderer.winWidth() / 2),
+		- (camera.position().x() - renderer.renderWidth() / 2),
 
 		(position().y() - height() / 2)
-		- (camera.position().y() - renderer.winHeight() / 2),
+		- (camera.position().y() - renderer.renderHeight() / 2),
 
 		width(),
 
 		height()
 	};
 	renderer.renderTexture(sprite()->texture(), srcRect, dstRect);
+
+}
+
+bool Actor::mouseOver(const Renderer& renderer,
+	const Input& input,
+	const Camera& camera) const
+{
+	int viewportXPos{
+		(position().x() - width() / 2)
+		- (camera.position().x() - renderer.renderWidth() / 2)
+	};
+	int viewportYPos{
+		(position().y() - height() / 2)
+		- (camera.position().y() - renderer.renderHeight() / 2)
+	};
+	return input.mousePosition().x() >= viewportXPos
+		&& input.mousePosition().x() <= viewportXPos + width()
+		&& input.mousePosition().y() >= viewportYPos
+		&& input.mousePosition().y() <= viewportYPos + height();
 
 }

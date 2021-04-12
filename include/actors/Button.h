@@ -1,6 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 #include <string>
+#include <functional>
 
 #include "SDL.h"
 
@@ -11,15 +12,9 @@ class Input;
 
 class Button : public Ui
 {
-	enum class State
-	{
-		Normal,
-		Hover,
-		Clicked,
-		MAX_STATES
-	};
+	std::function<void()> _callback;
 
-	State _state;
+	void activate() const;
 
 public:
 	static constexpr int speed{ 5 };
@@ -30,17 +25,16 @@ public:
 		int frames);
 	~Button();
 
-	virtual void update();
+	virtual State* handleEvent(Engine* engine, SDL_Event event);
+	virtual State* update(Engine* engine);
 	virtual bool visible() const;
-
-	bool mouseOver(const Renderer& renderer,
-		const Input& input,
-		const Camera& camera) const;
 
 	AnimatedSprite* animatedSprite();
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);
+
+	void onClick(std::function<void()> callback);
 };
 
 #endif

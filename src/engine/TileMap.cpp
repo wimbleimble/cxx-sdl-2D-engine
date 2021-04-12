@@ -66,10 +66,10 @@ void TileMap::render(Renderer& renderer,
 				const SDL_Rect& srcRect{ atlas()[_map[row][col]] };
 				const SDL_Rect dstRect{
 					(position().x() + row * _tileWidth)
-					- (camera.position().x() - renderer.winWidth() / 2),
+					- (camera.position().x() - renderer.renderWidth() / 2),
 
 					(position().y() + col * _tileHeight)
-					- (camera.position().y() - renderer.winHeight() / 2),
+					- (camera.position().y() - renderer.renderHeight() / 2),
 
 					_tileWidth,
 

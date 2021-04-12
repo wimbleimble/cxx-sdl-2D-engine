@@ -23,12 +23,14 @@ private:
 	void setState(State* state);
 
 public:
-	Engine(const Renderer::WindowParams& windowParams = { "Title", 640, 480 });
+	Engine(const Renderer::WindowParams& windowParams = { "Title", 1280, 720 },
+		const Renderer::RenderParams& renderParams = { 320, 180 });
 	~Engine();
 
 	const Renderer& renderer() const;
 	Renderer& renderer();
 	const Input& input();
+	State* state();
 	double deltaTime() const;
 
 	int exec(State* entryState);

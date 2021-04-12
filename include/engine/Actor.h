@@ -10,6 +10,8 @@ class Sprite;
 class Engine;
 class Renderer;
 class Camera;
+class State;
+class Input;
 
 class Actor
 {
@@ -25,7 +27,8 @@ public:
 	Actor(SDL_Renderer* context, const std::string& path);
 	virtual ~Actor();
 
-	virtual void update() = 0;
+	virtual State* handleEvent(Engine* engine, SDL_Event event) = 0;
+	virtual State* update(Engine* engine) = 0;
 	virtual bool visible() const = 0;
 
 	Sprite* const sprite() const;
@@ -33,7 +36,9 @@ public:
 	virtual int width() const;
 	virtual int height() const;
 
-	bool mouseOver(const Engine* engine, const Camera& camera);
+	bool mouseOver(const Renderer& renderer,
+		const Input& input,
+		const Camera& camera) const;
 
 	Vec2& position();
 	Sprite* sprite();

@@ -32,6 +32,7 @@ public:
 	~AnimatedSprite();
 
 	virtual SDL_Rect srcRect(double deltaTime);
+	const std::string& currentAnimation() const;
 
 	void addAnimation(
 		const std::string& name, int startFrame, int length, int frameRate

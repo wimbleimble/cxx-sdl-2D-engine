@@ -75,6 +75,11 @@ SDL_Rect AnimatedSprite::srcRect(double deltaTime)
 		});
 }
 
+const std::string& AnimatedSprite::currentAnimation() const
+{
+	return _currentAnimation;
+}
+
 AnimatedSprite& AnimatedSprite::operator=(const AnimatedSprite& sprite)
 {
 	_frames = sprite._frames;

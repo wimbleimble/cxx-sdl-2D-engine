@@ -29,7 +29,6 @@ set(src
 	engine/TileAtlas.cpp
 	engine/TileMap.cpp
 	engine/Ui.cpp
-	actors/Character.cpp
 	actors/Button.cpp
 	states/MenuState.cpp
 )

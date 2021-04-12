@@ -1,5 +1,10 @@
 #include "Button.h"
+
+#include <iostream>
+
 #include "AnimatedSprite.h"
+#include "Engine.h"
+#include "State.h"
 #include "Renderer.h"
 #include "Input.h"
 #include "Camera.h"
@@ -18,8 +23,36 @@ Button::Button(SDL_Renderer* context,
 
 Button::~Button() {}
 
-void Button::update()
+void Button::activate() const
 {
+	if (_callback)
+		_callback();
+}
+
+State* Button::handleEvent(Engine* engine, SDL_Event event)
+{
+	switch (event.type)
+	{
+	case SDL_MOUSEBUTTONUP:
+		if (animatedSprite()->currentAnimation() == "Clicked")
+			activate();
+
+	};
+	return nullptr;
+}
+
+State* Button::update(Engine* engine)
+{
+	if (mouseOver(engine->renderer(),
+		engine->input(),
+		engine->state()->camera()))
+		if (engine->input().mouseState(Input::MouseButton::Left))
+			animatedSprite()->setAnimation("Clicked");
+		else
+			animatedSprite()->setAnimation("Hover");
+	else
+		animatedSprite()->setAnimation("Normal");
+	return nullptr;
 }
 
 bool Button::visible() const
@@ -27,26 +60,13 @@ bool Button::visible() const
 	return true;
 }
 
-bool Button::mouseOver(const Renderer& renderer,
-	const Input& input,
-	const Camera& camera) const
-{
-	int viewportXPos{
-		(position().x() - width() / 2)
-		- (camera.position().x() - renderer.winWidth() / 2)
-	};
-	int viewportYPos{
-		(position().y() - height() / 2)
-		- (camera.position().y() - renderer.winHeight() / 2)
-	};
-	return input.mousePosition().x() >= viewportXPos
-		&& input.mousePosition().x() <= viewportXPos + width()
-		&& input.mousePosition().y() >= viewportYPos
-		&& input.mousePosition().y() <= viewportYPos + height();
-
-}
 
 AnimatedSprite* Button::animatedSprite()
 {
 	return static_cast<AnimatedSprite*>(_sprite);
+}
+
+void Button::onClick(std::function<void()> callback)
+{
+	_callback = callback;
 }

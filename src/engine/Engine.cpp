@@ -5,10 +5,11 @@
 
 #include "State.h"
 
-Engine::Engine(const Renderer::WindowParams& windowParams)
+Engine::Engine(const Renderer::WindowParams& windowParams,
+	const Renderer::RenderParams& renderParams)
 	: _sdl{},
-	_renderer{ windowParams },
-	_input{},
+	_renderer{ windowParams, renderParams },
+	_input{ _renderer.widthScale(), _renderer.heightScale() },
 	_state{ nullptr },
 	_run{ true }
 {
@@ -47,19 +48,44 @@ int Engine::exec(State* entryState)
 				_run = false;
 				continue;
 			case SDL_MOUSEMOTION:
-				_input.updateMousePosition();
+				_input.updateMousePosition(_renderer.widthScale(),
+					_renderer.heightScale());
 				break;
 			case SDL_KEYDOWN:
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
+				// this is the ugliest fucking thing i have ever written and i
+				// have no idea what to do with it.
+				newState = _state->handleActorEvent(this, event);
+				if (newState != nullptr)
+				{
+					setState(newState);
+					newState = nullptr;
+					continue;
+				}
 				newState = _state->handleEvent(this, event);
+				if (newState != nullptr)
+				{
+					setState(newState);
+					newState = nullptr;
+					continue;
+				}
 				break;
 			}
 		}
+
+		// what the fuck am i doing with my life
+
+		newState = _state->actorUpdate(this);
+
 		if (newState != nullptr)
 		{
 			setState(newState);
 			newState = nullptr;
 			continue;
 		}
+
+		// i can't believe i thought i was good at programming
 
 		newState = _state->update(this);
 
@@ -69,6 +95,10 @@ int Engine::exec(State* entryState)
 			newState = nullptr;
 			continue;
 		}
+
+		// i don't believe in a god or any sort of afterlife but i do believe i
+		// am going to hell for this.
+
 		_renderer.renderState(_state, _deltaTime);
 	}
 	_state->exit(this);
@@ -83,6 +113,11 @@ const Renderer& Engine::renderer() const
 Renderer& Engine::renderer()
 {
 	return _renderer;
+}
+
+State* Engine::state()
+{
+	return _state;
 }
 
 const Input& Engine::input()

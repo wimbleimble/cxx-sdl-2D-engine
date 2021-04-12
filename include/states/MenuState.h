@@ -19,6 +19,7 @@ public:
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
 	virtual void exit(Engine* engine);
+
 };
 
 #endif
