@@ -132,7 +132,6 @@ double Engine::deltaTime() const
 
 void Engine::setState(State* state)
 {
-	std::cout << "Changing state\n";
 	if (_state != nullptr)
 		_state->exit(this);
 	_state = state;

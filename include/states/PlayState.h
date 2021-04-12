@@ -1,26 +1,28 @@
-#ifndef MENUSTATE_H
-#define MENUSTATE_H
+#ifndef PLAYSTATE_H
+#define PLAYSTATE_H
 #include "State.h"
 #include "Button.h"
 
 class Engine;
 
-class MenuState : public State
+class PlayState : public State
 {
-
-	Button _startButton;
-	bool _start;
+	enum class Layers
+	{
+		Background,
+		Main,
+		Ui,
+		NUM_LAYERS
+	};
 
 public:
-	MenuState(Engine* engine);
-	~MenuState();
+	PlayState(Engine* engine);
+	~PlayState();
 
 	virtual void enter(Engine* engine);
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
 	virtual void exit(Engine* engine);
-
-	void startCallback(Engine* engine);
 
 };
 

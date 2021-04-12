@@ -31,6 +31,7 @@ set(src
 	engine/Ui.cpp
 	actors/Button.cpp
 	states/MenuState.cpp
+	states/PlayState.cpp
 )
 
 find_package(SDL2 REQUIRED)
