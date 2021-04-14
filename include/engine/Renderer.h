@@ -51,7 +51,9 @@ public:
 	void renderState(State* state, double deltaTime);
 	void renderTexture(SDL_Texture* texture,
 		const SDL_Rect& srcRect,
-		const SDL_Rect& dstRect);
+		const SDL_Rect& dstRect,
+		const double angle = 0,
+		const SDL_RendererFlip flip = SDL_FLIP_NONE);
 };
 
 

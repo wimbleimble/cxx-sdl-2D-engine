@@ -69,7 +69,9 @@ void TileMap::render(Renderer& renderer,
 	double deltaTime)
 {
 	for (int row{}; row < width(); ++row)
+	{
 		for (int col{}; col < height(); ++col)
+		{
 			if (_map[row][col] >= 0)
 			{
 				const SDL_Rect& srcRect{ atlas()[_map[row][col]] };
@@ -88,4 +90,6 @@ void TileMap::render(Renderer& renderer,
 					srcRect,
 					dstRect);
 			}
+		}
+	}
 }

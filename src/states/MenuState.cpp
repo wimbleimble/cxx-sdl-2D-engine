@@ -13,6 +13,7 @@ MenuState::MenuState(Engine* engine)
 	_startButton.onClick(std::bind([this](Engine* engine) {
 		this->startCallback(engine);
 		}, engine));
+
 }
 
 MenuState::~MenuState() {}
@@ -31,6 +32,7 @@ State* MenuState::update(Engine* engine)
 {
 	if (_start)
 		return new PlayState(engine);
+	_startButton.setAngle(engine->deltaTime() * 0.5 + _startButton.angle());
 	return nullptr;
 }
 

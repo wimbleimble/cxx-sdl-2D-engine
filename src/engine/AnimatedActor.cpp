@@ -42,5 +42,9 @@ void AnimatedActor::render(Renderer& renderer,
 
 		height()
 	};
-	renderer.renderTexture(_animator.sprite().texture(), srcRect, dstRect);
+	renderer.renderTexture(_animator.sprite().texture(),
+		srcRect,
+		dstRect,
+		_angle,
+		_flip);
 }

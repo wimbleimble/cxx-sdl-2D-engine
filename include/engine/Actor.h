@@ -20,6 +20,8 @@ protected:
 	Vec2 _position;
 	int _width;
 	int _height;
+	double _angle;
+	SDL_RendererFlip _flip;
 	int _zIndex;
 
 public:
@@ -34,6 +36,8 @@ public:
 	const Vec2& position() const;
 	int width() const;
 	int height() const;
+	double angle() const;
+	SDL_RendererFlip flip() const;
 	int zIndex() const;
 
 	bool mouseOver(const Renderer& renderer,
@@ -46,6 +50,10 @@ public:
 
 	void setPosition(const Vec2& position);
 	void setPosition(int x, int y);
+	void setWidth(int width);
+	void setHeight(int height);
+	void setAngle(double angle);
+	void setFlip(SDL_RendererFlip flip);
 	void setZIndex(int zIndex);
 
 	bool operator > (const Actor& actor) const;

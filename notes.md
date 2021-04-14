@@ -7,10 +7,8 @@
 	could correspond to both a and left arrow
 *	viewport culling AABB COLLISION - might not be necessary: open gl will cull
 	for me, need to do tests when i have something more intesive.
-*	tilemaps - split sprite into animated sprite and tilemap
-*	get rid of the sprite polymorphism: its no longer needed.
-*	make sprite not a member of actor inherently but instead a member of animated
-	sprite and tilemap
+*	make mouseover properly work with rotation.
+*	reimplement mouseover with colliders rather than just with actor dimensions
 
 ## THINGS THAT MAY CAUSE PROBLEMS LATER:
 -	SDLImage paths resolve based on where the application is launched, and so

@@ -90,7 +90,9 @@ void Renderer::renderState(State* state, double deltaTime)
 }
 void Renderer::renderTexture(SDL_Texture* texture,
 	const SDL_Rect& srcRect,
-	const SDL_Rect& dstRect)
+	const SDL_Rect& dstRect,
+	const double angle,
+	const SDL_RendererFlip flip)
 {
 	const int wScale{ widthScale() };
 	const int hScale{ heightScale() };
@@ -102,5 +104,11 @@ void Renderer::renderTexture(SDL_Texture* texture,
 		dstRect.h * hScale
 	};
 
-	SDL_RenderCopy(_renderer, texture, &srcRect, &scaledDst);
+	SDL_RenderCopyEx(_renderer,
+		texture,
+		&srcRect,
+		&scaledDst,
+		angle,
+		nullptr,
+		flip);
 }
