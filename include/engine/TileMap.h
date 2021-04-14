@@ -3,13 +3,15 @@
 #include <vector>
 
 #include "Actor.h"
+#include "TileAtlas.h"
 
-class TileAtlas;
 
 class TileMap : public Actor
 {
 	int _tileWidth;
 	int _tileHeight;
+
+	TileAtlas _atlas;
 
 	std::vector<std::vector<int>> _map;
 
@@ -26,6 +28,10 @@ public:
 	void setTile(int x, int y, int index);
 	virtual int width() const;
 	virtual int height() const;
+
+	// this feels inefficient
+	virtual State* handleEvent(Engine* engine, SDL_Event event);
+	virtual State* update(Engine* engine);
 
 	const TileAtlas& atlas() const;
 	TileAtlas& atlas();

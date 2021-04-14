@@ -12,7 +12,8 @@ TileMap::TileMap(SDL_Renderer* context,
 	int tileHeight,
 	int mapWidth,
 	int mapHeight)
-	: Actor{ new TileAtlas(context, path) },
+	:Actor{ mapWidth, mapHeight },
+	_atlas{ context, path },
 	_tileWidth{ tileWidth },
 	_tileHeight{ tileHeight },
 	_map(mapWidth, std::vector<int>(mapHeight, -1))
@@ -33,12 +34,12 @@ int TileMap::height() const
 
 const TileAtlas& TileMap::atlas() const
 {
-	return *static_cast<TileAtlas*>(sprite());
+	return _atlas;
 }
 
 TileAtlas& TileMap::atlas()
 {
-	return *static_cast<TileAtlas*>(sprite());
+	return _atlas;
 }
 
 void TileMap::setTile(int x, int y, int index)
@@ -46,6 +47,16 @@ void TileMap::setTile(int x, int y, int index)
 	assert(x < width() || y < height());
 	assert(index < atlas().numTiles());
 	_map[x][y] = index;
+}
+
+State* TileMap::handleEvent(Engine* engine, SDL_Event event)
+{
+	return nullptr;
+}
+
+State* TileMap::update(Engine* engine)
+{
+	return nullptr;
 }
 
 bool TileMap::visible() const
@@ -58,9 +69,7 @@ void TileMap::render(Renderer& renderer,
 	double deltaTime)
 {
 	for (int row{}; row < width(); ++row)
-	{
 		for (int col{}; col < height(); ++col)
-		{
 			if (_map[row][col] >= 0)
 			{
 				const SDL_Rect& srcRect{ atlas()[_map[row][col]] };
@@ -75,10 +84,8 @@ void TileMap::render(Renderer& renderer,
 
 					_tileHeight
 				};
-				renderer.renderTexture(sprite()->texture(), srcRect, dstRect);
-
+				renderer.renderTexture(_atlas.sprite().texture(),
+					srcRect,
+					dstRect);
 			}
-		}
-	}
-
 }

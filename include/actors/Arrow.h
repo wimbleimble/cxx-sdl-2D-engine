@@ -1,36 +1,36 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef ARROW_H
+#define ARROW_H
 #include <string>
-#include <functional>
 
 #include "SDL.h"
 
-#include "Ui.h"
+#include "Actor.h"
 
 class AnimatedSprite;
-class Input;
 
-class Button : public Ui
+class Arrow : public Actor
 {
-	std::function<void()> _callback;
-
-	void activate() const;
-
+	Vec2 _v;
 public:
-	Button(SDL_Renderer* context,
+	Arrow(SDL_Renderer* context,
 		const std::string& path,
 		int width,
 		int height,
-		int frames);
-	~Button();
+		int frames,
+		Vec2 velocity);
+	~Arrow();
+
 
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
+	virtual bool visible() const;
+
+	Sprite* sprite();
+
+	AnimatedSprite* animatedSprite();
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);
-
-	void onClick(std::function<void()> callback);
 };
 
 #endif

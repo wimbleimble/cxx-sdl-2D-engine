@@ -10,13 +10,9 @@ Sprite::Sprite(SDL_Renderer* context, const std::string& path)
 	_texture{},
 	_width{},
 	_height{},
-	_sourceWidth{},		// set in loadTexture
-	_sourceHeight{},	// diito
-	_path{}				// ditto
+	_path{}
 {
 	loadTexture(path);
-	_width = _sourceWidth;
-	_height = _sourceHeight;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -24,13 +20,9 @@ Sprite::Sprite(const Sprite& sprite)
 	_texture{},
 	_width{},
 	_height{},
-	_sourceWidth{},		// set in loadTexture
-	_sourceHeight{},	// ditto
-	_path{}				// ditto
+	_path{}
 {
 	loadTexture(sprite._path);
-	_width = _sourceWidth;
-	_height = _sourceHeight;
 }
 
 Sprite::~Sprite()
@@ -46,8 +38,8 @@ void Sprite::loadTexture(const std::string& path)
 	if (surface == nullptr)
 		throw Err(IMG_GetError(), Err::Type::SDLImage);
 
-	_sourceWidth = surface->w;
-	_sourceHeight = surface->h;
+	_width = surface->w;
+	_height = surface->h;
 	if (_texture != nullptr)
 		SDL_DestroyTexture(_texture);
 
@@ -58,19 +50,9 @@ void Sprite::loadTexture(const std::string& path)
 		throw Err(SDL_GetError(), Err::Type::SDL);
 }
 
-SDL_Texture* Sprite::texture()
+SDL_Texture* Sprite::texture() const
 {
 	return _texture;
-}
-
-int Sprite::sourceWidth() const
-{
-	return _sourceWidth;
-}
-
-int Sprite::sourceHeight() const
-{
-	return _sourceHeight;
 }
 
 int Sprite::width() const
@@ -81,11 +63,6 @@ int Sprite::width() const
 int Sprite::height() const
 {
 	return _height;
-}
-
-SDL_Rect Sprite::srcRect(double deltaTime)
-{
-	return SDL_Rect({ 0, 0, _width, _height });
 }
 
 Sprite& Sprite::operator=(const Sprite& sprite)

@@ -17,34 +17,32 @@ class Actor
 {
 
 protected:
-	Sprite* _sprite;
 	Vec2 _position;
+	int _width;
+	int _height;
 	int _zIndex;
 
-	Actor(Sprite* sprite);
-
 public:
-	Actor(SDL_Renderer* context, const std::string& path);
+	Actor() = default;
+	Actor(int width, int height);
 	virtual ~Actor();
 
 	virtual State* handleEvent(Engine* engine, SDL_Event event) = 0;
 	virtual State* update(Engine* engine) = 0;
-	virtual bool visible() const = 0;
+	virtual bool visible() const;
 
-	Sprite* const sprite() const;
 	const Vec2& position() const;
-	virtual int width() const;
-	virtual int height() const;
+	int width() const;
+	int height() const;
+	int zIndex() const;
 
 	bool mouseOver(const Renderer& renderer,
 		const Input& input,
 		const Camera& camera) const;
 
-	Vec2& position();
-	Sprite* sprite();
 	virtual void render(Renderer& renderer,
 		const Camera& camera,
-		double deltaTime);
+		double deltaTime) = 0;
 
 	void setPosition(const Vec2& position);
 	void setPosition(int x, int y);

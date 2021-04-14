@@ -13,8 +13,6 @@ protected:
 	SDL_Texture* _texture;
 	int _width;
 	int _height;
-	int _sourceWidth;
-	int _sourceHeight;
 
 	SDL_Renderer* _context;
 	std::string _path;
@@ -22,7 +20,6 @@ protected:
 
 public:
 
-	Sprite() = default;
 	Sprite(SDL_Renderer* context,
 		const std::string& path);
 	Sprite(const Sprite& sprite);
@@ -31,14 +28,7 @@ public:
 
 	virtual int width() const;
 	virtual int height() const;
-	int sourceWidth() const;
-	int sourceHeight() const;
-	SDL_Texture* texture();
-
-	virtual SDL_Rect srcRect(double deltaTime);
-
-	void setWidth(int width);
-	void setHeight(int height);
+	SDL_Texture* texture() const;
 
 	Sprite& operator=(const Sprite& sprite);
 };

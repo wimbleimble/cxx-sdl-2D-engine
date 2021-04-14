@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "AnimatedSprite.h"
 #include "Engine.h"
 #include "State.h"
 #include "Renderer.h"
@@ -14,11 +13,11 @@ Button::Button(SDL_Renderer* context,
 	int width,
 	int height,
 	int frames)
-	: Ui{ new AnimatedSprite(context, path, width, height, frames) }
+	: Ui{ context, path, width, height, frames }
 {
-	animatedSprite()->addAnimation("Normal", 0, 1, 15);
-	animatedSprite()->addAnimation("Hover", 1, 1, 15);
-	animatedSprite()->addAnimation("Clicked", 2, 1, 15);
+	animator().addAnimation("Normal", 0, 1, 15);
+	animator().addAnimation("Hover", 1, 1, 15);
+	animator().addAnimation("Clicked", 2, 1, 15);
 }
 
 Button::~Button() {}
@@ -34,7 +33,7 @@ State* Button::handleEvent(Engine* engine, SDL_Event event)
 	switch (event.type)
 	{
 	case SDL_MOUSEBUTTONUP:
-		if (animatedSprite()->currentAnimation() == "Clicked")
+		if (animator().currentAnimation() == "Clicked")
 			activate();
 
 	};
@@ -47,23 +46,12 @@ State* Button::update(Engine* engine)
 		engine->input(),
 		engine->state()->camera()))
 		if (engine->input().mouseState(Input::MouseButton::Left))
-			animatedSprite()->setAnimation("Clicked");
+			animator().setAnimation("Clicked");
 		else
-			animatedSprite()->setAnimation("Hover");
+			animator().setAnimation("Hover");
 	else
-		animatedSprite()->setAnimation("Normal");
+		animator().setAnimation("Normal");
 	return nullptr;
-}
-
-bool Button::visible() const
-{
-	return true;
-}
-
-
-AnimatedSprite* Button::animatedSprite()
-{
-	return static_cast<AnimatedSprite*>(_sprite);
 }
 
 void Button::onClick(std::function<void()> callback)

@@ -4,11 +4,9 @@
 
 #include "Sprite.h"
 
-class TileAtlas : public Sprite
+class TileAtlas
 {
-	void setWidth(int width);
-	void setHeight(int height);
-
+	Sprite _sprite;
 	std::vector<SDL_Rect> _tiles;
 
 public:
@@ -16,16 +14,20 @@ public:
 	TileAtlas() = default;
 	TileAtlas(SDL_Renderer* context,
 		const std::string& path);
-	TileAtlas(const TileAtlas& sprite);
+
+	// mabybe inplement some sort of sharing semantics so that two objects with
+	// the same tilemap can use the same instance. its deleted for now tho
+	TileAtlas(const TileAtlas& sprite) = delete;
 
 	~TileAtlas();
+
+	const Sprite& sprite() const;
 
 	int registerTile(int x, int y, int width, int height);
 
 	int numTiles() const;
 
 	const SDL_Rect& operator[](int index) const;
-	TileAtlas& operator=(const TileAtlas& sprite);
 };
 
 #endif

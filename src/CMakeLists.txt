@@ -19,10 +19,11 @@ set(src
 	engine/SDLHandler.cpp
 	engine/LogHandler.cpp
 	engine/Sprite.cpp
-	engine/AnimatedSprite.cpp
+	engine/Animator.cpp
 	engine/Vec2.cpp
 	engine/State.cpp
 	engine/Actor.cpp
+	engine/AnimatedActor.cpp
 	engine/Layer.cpp
 	engine/Scene.cpp
 	engine/Camera.cpp

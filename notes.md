@@ -9,6 +9,8 @@
 	for me, need to do tests when i have something more intesive.
 *	tilemaps - split sprite into animated sprite and tilemap
 *	get rid of the sprite polymorphism: its no longer needed.
+*	make sprite not a member of actor inherently but instead a member of animated
+	sprite and tilemap
 
 ## THINGS THAT MAY CAUSE PROBLEMS LATER:
 -	SDLImage paths resolve based on where the application is launched, and so

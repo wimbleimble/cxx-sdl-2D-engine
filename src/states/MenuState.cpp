@@ -2,7 +2,6 @@
 #include <iostream>
 #include <functional>
 #include "Engine.h"
-#include "AnimatedSprite.h"
 #include "PlayState.h"
 
 MenuState::MenuState(Engine* engine)

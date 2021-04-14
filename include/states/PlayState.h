@@ -2,6 +2,7 @@
 #define PLAYSTATE_H
 #include "State.h"
 #include "Button.h"
+#include "TileMap.h"
 
 class Engine;
 
@@ -14,6 +15,9 @@ class PlayState : public State
 		Ui,
 		NUM_LAYERS
 	};
+
+	TileMap bg;
+	static constexpr int speed{ 5 };
 
 public:
 	PlayState(Engine* engine);

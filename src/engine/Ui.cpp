@@ -7,32 +7,22 @@
 #include "Camera.h"
 #include "Renderer.h"
 
-Ui::Ui(SDL_Renderer* context, const std::string& path)
-	: Actor{ context, path }
-{
-}
-
-Ui::Ui(Sprite* sprite)
-	: Actor{ sprite }
+Ui::Ui(SDL_Renderer* context,
+	const std::string& path,
+	int width,
+	int height,
+	int frames)
+	: AnimatedActor{ context, path, width, height, frames }
 {
 }
 
 Ui::~Ui() {}
 
-void Ui::update()
-{
-}
-
-bool Ui::visible() const
-{
-	return true;
-}
-
 void Ui::render(Renderer& renderer,
 	const Camera& camera,
 	double deltaTime)
 {
-	Actor::render(renderer,
+	AnimatedActor::render(renderer,
 		Camera(),
 		deltaTime);
 }
