@@ -31,6 +31,7 @@ set(src
 	engine/TileMap.cpp
 	engine/Ui.cpp
 	actors/Button.cpp
+	actors/Arrow.cpp
 	states/MenuState.cpp
 	states/PlayState.cpp
 )
@@ -41,6 +42,8 @@ find_package(SDL2_Image REQUIRED)
 add_executable(${PROJECT_NAME}
 	${src}
 )
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ../include)
 target_include_directories(${PROJECT_NAME} PUBLIC ../include/engine)

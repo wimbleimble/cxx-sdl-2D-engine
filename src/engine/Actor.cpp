@@ -67,6 +67,9 @@ void Actor::setZIndex(int zIndex)
 	_zIndex = zIndex;
 }
 
+State* Actor::handleEvent(Engine* engine, SDL_Event event) { return nullptr; }
+State* Actor::update(Engine* engine) { return nullptr; }
+
 bool Actor::mouseOver(const Renderer& renderer,
 	const Input& input,
 	const Camera& camera) const

@@ -21,7 +21,7 @@ const Camera& State::camera() const
 State* State::handleActorEvent(Engine* engine, SDL_Event event)
 {
 	State* ret{};
-	for (Layer layer : _scene)
+	for (Layer& layer : _scene)
 		for (Actor* actor : layer)
 		{
 			ret = actor->handleEvent(engine, event);
@@ -35,7 +35,7 @@ State* State::handleActorEvent(Engine* engine, SDL_Event event)
 State* State::actorUpdate(Engine* engine)
 {
 	State* ret{};
-	for (Layer layer : _scene)
+	for (Layer& layer : _scene)
 		for (Actor* actor : layer)
 		{
 			ret = actor->update(engine);

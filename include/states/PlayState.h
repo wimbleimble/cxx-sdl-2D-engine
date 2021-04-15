@@ -16,8 +16,8 @@ class PlayState : public State
 		NUM_LAYERS
 	};
 
-	TileMap bg;
-	static constexpr int speed{ 5 };
+	double _timer;
+	//AnimatedActor* _heart;
 
 public:
 	PlayState(Engine* engine);

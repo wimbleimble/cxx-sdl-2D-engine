@@ -8,7 +8,7 @@ class Engine;
 class MenuState : public State
 {
 
-	Button _startButton;
+	Button* _startButton;
 	bool _start;
 
 public:

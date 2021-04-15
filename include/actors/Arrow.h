@@ -4,30 +4,43 @@
 
 #include "SDL.h"
 
-#include "Actor.h"
+#include "AnimatedActor.h"
 
-class AnimatedSprite;
 
-class Arrow : public Actor
+class Arrow : public AnimatedActor
 {
-	Vec2 _v;
+public:
+
+	enum class Direction
+	{
+		LeftRight,
+		TopBottom,
+		RightLeft,
+		BottomTop,
+		Num
+	};
+
+private:
+	double _speed;
+	Direction _direction;
+
+	inline static constexpr int velocityLookup[(int)Direction::Num][2]{
+		{1, 0}, {0, 1}, {-1, 0}, {0, -1} };
+
 public:
 	Arrow(SDL_Renderer* context,
 		const std::string& path,
 		int width,
 		int height,
 		int frames,
-		Vec2 velocity);
+		Direction direction,
+		double speed);
 	~Arrow();
 
 
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
 	virtual bool visible() const;
-
-	Sprite* sprite();
-
-	AnimatedSprite* animatedSprite();
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);

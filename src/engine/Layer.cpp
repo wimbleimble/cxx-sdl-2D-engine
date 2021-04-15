@@ -5,8 +5,15 @@
 
 #include "Actor.h"
 
+// ugh i guess i have to learn move semantics already
+Layer::Layer(const Layer& layer)
+{
+}
+
 Layer::~Layer()
 {
+	for (Actor* actor : _vec)
+		delete actor;
 }
 
 void Layer::sort()
@@ -16,10 +23,11 @@ void Layer::sort()
 		});
 }
 
-void Layer::addActor(Actor* actor)
+Actor* Layer::addActor(Actor* actor)
 {
 	_vec.push_back(actor);
 	sort();
+	return actor;
 }
 
 void Layer::removeActor(Actor* actor)

@@ -10,9 +10,10 @@ class Layer
 
 public:
 	Layer() = default;
+	Layer(const Layer& layer);
 	~Layer();
 
-	void addActor(Actor* actor);
+	Actor* addActor(Actor* actor);
 	void removeActor(Actor* actor);
 	void sort();
 
@@ -20,6 +21,8 @@ public:
 	const std::vector<Actor*>::const_iterator begin() const;
 	std::vector<Actor*>::iterator end();
 	const std::vector<Actor*>::const_iterator end() const;
+
+	Layer& operator = (const Layer&) = delete; //see copy constructor above.
 
 };
 

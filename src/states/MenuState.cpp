@@ -6,11 +6,16 @@
 
 MenuState::MenuState(Engine* engine)
 	: State{ 1 },
-	_startButton{ engine->renderer().context(), "start-button.png", 64, 32, 3 },
+	_startButton{
+		static_cast<Button*>(_scene[0].addActor(
+			new Button(engine->renderer().context(),
+			"start-button.png",
+			64,
+			32,
+			3))) },
 	_start{ false }
 {
-	_scene[0].addActor(&_startButton);
-	_startButton.onClick(std::bind([this](Engine* engine) {
+	_startButton->onClick(std::bind([this](Engine* engine) {
 		this->startCallback(engine);
 		}, engine));
 
@@ -20,7 +25,6 @@ MenuState::~MenuState() {}
 
 void MenuState::enter(Engine* engine)
 {
-	std::cout << "Entering MenuState\n";
 }
 
 State* MenuState::handleEvent(Engine* engine, SDL_Event event)
@@ -32,7 +36,7 @@ State* MenuState::update(Engine* engine)
 {
 	if (_start)
 		return new PlayState(engine);
-	_startButton.setAngle(engine->deltaTime() * 0.5 + _startButton.angle());
+	_startButton->setAngle(engine->deltaTime() * 0.4 + _startButton->angle());
 	return nullptr;
 }
 

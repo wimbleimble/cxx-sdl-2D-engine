@@ -29,8 +29,8 @@ public:
 	Actor(int width, int height);
 	virtual ~Actor();
 
-	virtual State* handleEvent(Engine* engine, SDL_Event event) = 0;
-	virtual State* update(Engine* engine) = 0;
+	virtual State* handleEvent(Engine* engine, SDL_Event event);
+	virtual State* update(Engine* engine);
 	virtual bool visible() const;
 
 	const Vec2& position() const;
