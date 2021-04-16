@@ -6,6 +6,7 @@
 
 class AnimatedActor : public Actor
 {
+protected:
 	Animator _animator;
 
 public:

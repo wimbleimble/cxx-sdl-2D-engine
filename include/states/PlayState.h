@@ -5,6 +5,7 @@
 #include "TileMap.h"
 
 class Engine;
+class Shield;
 
 class PlayState : public State
 {
@@ -17,7 +18,8 @@ class PlayState : public State
 	};
 
 	double _timer;
-	//AnimatedActor* _heart;
+	AnimatedActor* _heart;
+	Shield* _shield;
 
 public:
 	PlayState(Engine* engine);

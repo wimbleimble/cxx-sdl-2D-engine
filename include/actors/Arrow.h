@@ -40,7 +40,6 @@ public:
 
 	virtual State* handleEvent(Engine* engine, SDL_Event event);
 	virtual State* update(Engine* engine);
-	virtual bool visible() const;
 
 	const Vec2& v() const;
 	void setV(const Vec2& v);

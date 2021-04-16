@@ -5,17 +5,21 @@
 #include "SDL.h"
 
 #include "Sprite.h"
+class Animation;
 
 class Animator
 {
-	struct Animation
+	enum class PlayState
 	{
-		int startFrame;
-		int length;
-		int frameRate;
+		Stopped,
+		Play,
+		Loop,
+		Num
 	};
 
 	Sprite _sprite;
+	PlayState _playState;
+	bool _reverse;
 
 	int _width;
 	int _height;
@@ -24,6 +28,8 @@ class Animator
 	std::map<std::string, Animation> _animations;
 	std::string _currentAnimation;
 	int _currentFrame; // relative to animation not overall spritesheet
+
+	void animationEnd();
 
 public:
 	Animator(SDL_Renderer* context,
@@ -45,7 +51,13 @@ public:
 
 	void addAnimation(
 		const std::string& name, int startFrame, int length, int frameRate);
-	void setAnimation(const std::string& animation);
+	void playAnimation(const std::string& animation,
+		bool loop = false,
+		bool reverse = false);
+
+	void stop();
+
+	Animation& operator [] (const std::string& key);
 
 };
 

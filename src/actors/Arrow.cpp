@@ -51,8 +51,3 @@ State* Arrow::update(Engine* engine)
 		));
 	return nullptr;
 }
-
-bool Arrow::visible() const
-{
-	return true;
-}

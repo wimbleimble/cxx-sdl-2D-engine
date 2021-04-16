@@ -20,6 +20,7 @@ set(src
 	engine/LogHandler.cpp
 	engine/Sprite.cpp
 	engine/Animator.cpp
+	engine/Animation.cpp
 	engine/Vec2.cpp
 	engine/State.cpp
 	engine/Actor.cpp
@@ -32,6 +33,7 @@ set(src
 	engine/Ui.cpp
 	actors/Button.cpp
 	actors/Arrow.cpp
+	actors/Shield.cpp
 	states/MenuState.cpp
 	states/PlayState.cpp
 )

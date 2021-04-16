@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Input.h"
 #include "Camera.h"
+#include "Animation.h"
 
 Button::Button(SDL_Renderer* context,
 	const std::string& path,
@@ -46,11 +47,11 @@ State* Button::update(Engine* engine)
 		engine->input(),
 		engine->state()->camera()))
 		if (engine->input().mouseState(Input::MouseButton::Left))
-			animator().setAnimation("Clicked");
+			animator().playAnimation("Clicked");
 		else
-			animator().setAnimation("Hover");
+			animator().playAnimation("Hover");
 	else
-		animator().setAnimation("Normal");
+		animator().playAnimation("Normal");
 	return nullptr;
 }
 
