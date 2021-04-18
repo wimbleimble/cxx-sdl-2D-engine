@@ -9,7 +9,11 @@ int main(int argc, char* args[])
 	LogHandler logHandler{};
 	try
 	{
-		Engine engine{};
+		Engine engine{ Renderer::WindowParams{
+			"oh wow its just the undyne fight from undertale",
+			720, 720},
+		Renderer::RenderParams{180, 180}
+		};
 		return engine.exec(new MenuState(&engine));
 	}
 	catch (const Err& err)

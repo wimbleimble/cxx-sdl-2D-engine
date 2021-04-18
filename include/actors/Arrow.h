@@ -29,10 +29,6 @@ private:
 
 public:
 	Arrow(SDL_Renderer* context,
-		const std::string& path,
-		int width,
-		int height,
-		int frames,
 		Direction direction,
 		double speed);
 	~Arrow();

@@ -12,8 +12,8 @@ class PlayState : public State
 	enum class Layers
 	{
 		Background,
-		Main,
-		Ui,
+		Arrows,
+		Player,
 		NUM_LAYERS
 	};
 

@@ -9,7 +9,7 @@
 PlayState::PlayState(Engine* engine)
 	: State{ (int)Layers::NUM_LAYERS },
 	_heart{ static_cast<AnimatedActor*>(
-		_scene[(int)Layers::Main].addActor(
+		_scene[(int)Layers::Player].addActor(
 			new AnimatedActor(engine->renderer().context(),
 			"media/heart.png",
 			32,
@@ -18,11 +18,12 @@ PlayState::PlayState(Engine* engine)
 		)
 	) },
 	_shield{ static_cast<Shield*>(
-		_scene[(int)Layers::Main].addActor(
+		_scene[(int)Layers::Player].addActor(
 			new Shield(engine->renderer().context())
 		)
 	) }
 {
+	srand(engine->deltaTime());
 }
 
 PlayState::~PlayState() {}
@@ -38,6 +39,13 @@ State* PlayState::handleEvent(Engine* engine, SDL_Event event)
 
 State* PlayState::update(Engine* engine)
 {
+	_timer += engine->deltaTime();
+	if ((int)_timer % 500 == 0)
+		_scene[(int)Layers::Arrows].addActor(
+			new Arrow(engine->renderer().context(),
+				(Arrow::Direction)(rand() % 4),
+				1));
+
 	return nullptr;
 }
 

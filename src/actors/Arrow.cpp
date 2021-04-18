@@ -3,13 +3,9 @@
 #include "Engine.h"
 
 Arrow::Arrow(SDL_Renderer* context,
-	const std::string& path,
-	int width,
-	int height,
-	int frames,
 	Direction direction,
 	double speed)
-	: AnimatedActor{ context, path, width, height, frames },
+	: AnimatedActor{ context, "media/arrlr.png", 16, 16, 1 },
 	_direction{ direction },
 	_speed{ speed }
 {
@@ -17,18 +13,19 @@ Arrow::Arrow(SDL_Renderer* context,
 	{
 	case Direction::LeftRight:
 		_angle = -90;
-		_position.setX(-172);
+		_position.setX(-106);
 		break;
 	case Direction::RightLeft:
-		_angle = -90;
-		_position.setX(-172);
-		_flip = (SDL_RendererFlip)(_flip | SDL_FLIP_HORIZONTAL);
+		_angle = 90;
+		_position.setX(106);
+		_flip = SDL_FLIP_HORIZONTAL;
 		break;
 	case Direction::TopBottom:
-		_flip = (SDL_RendererFlip)(_flip | SDL_FLIP_VERTICAL);
+		_position.setY(-106);
 		break;
 	case Direction::BottomTop:
-		_position.setY(-106);
+		_flip = SDL_FLIP_VERTICAL;
+		_position.setY(106);
 		break;
 
 	};
@@ -46,8 +43,8 @@ State* Arrow::update(Engine* engine)
 	setPosition(
 		_position
 		+ Vec2(
-			velocityLookup[(int)_direction][0] * _speed * engine->deltaTime(),
-			velocityLookup[(int)_direction][1] * _speed * engine->deltaTime()
+			velocityLookup[(int)_direction][0] * (_speed / 10) * engine->deltaTime(),
+			velocityLookup[(int)_direction][1] * (_speed / 10) * engine->deltaTime()
 		));
 	return nullptr;
 }

@@ -10,8 +10,13 @@ Shield::Shield(SDL_Renderer* context)
 	_transitionCounter{}
 {
 	_animator.addAnimation("Idle", 0, 1, 60);
-	_animator.addAnimation("Move", 1, 2, 12);
-	_animator["Move"].onEnd(std::bind([](Animator* animator) {
+	_animator.addAnimation("MoveL", 1, 1, 24);
+	_animator.addAnimation("MoveR", 2, 1, 24);
+	_animator["MoveL"].onEnd(std::bind([](Animator* animator) {
+		std::cout << "done";
+		animator->playAnimation("Idle");
+		}, & _animator));
+	_animator["MoveR"].onEnd(std::bind([](Animator* animator) {
 		std::cout << "done";
 		animator->playAnimation("Idle");
 		}, & _animator));
@@ -57,9 +62,9 @@ State* Shield::update(Engine* engine)
 void Shield::setDirection(Direction direction)
 {
 	if ((int)direction > (int)_direction)
-		_animator.playAnimation("Move", false, true);
+		_animator.playAnimation("MoveR");
 	else
-		_animator.playAnimation("Move");
+		_animator.playAnimation("MoveL");
 
 	switch (direction)
 	{
